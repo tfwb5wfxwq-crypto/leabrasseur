@@ -122,9 +122,29 @@ export default function Home() {
                 ))}
               </div>
 
+              <div className="mt-20 max-w-3xl mx-auto">
+                <div className="space-y-8">
+                  <div className="border-b border-gray-100 pb-6">
+                    <h3 className="text-2xl font-light mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      2025
+                    </h3>
+                    <p className="text-gray-600 font-light mb-2">Campagne digitale et print - <span className="text-gray-800">Papik</span></p>
+                    <p className="text-sm text-gray-400 font-light">Test shoots avec Florian Boggia, Karina et Yoann</p>
+                  </div>
+
+                  <div className="border-b border-gray-100 pb-6">
+                    <h3 className="text-2xl font-light mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      2021
+                    </h3>
+                    <p className="text-gray-600 font-light mb-2">Miss Luxembourg</p>
+                    <p className="text-sm text-gray-400 font-light">Défilés au Luxembourg pour Émilie Bolland · Mannequin pour la marque Boger</p>
+                  </div>
+                </div>
+              </div>
+
               <div className="mt-16 text-center">
                 <p className="text-xs text-gray-400 tracking-wide">
-                  Florian Boggia · Studio Sessions
+                  Photographie · Florian Boggia
                 </p>
               </div>
             </div>
@@ -149,10 +169,11 @@ export default function Home() {
 
               <div className="space-y-12">
                 {[
-                  { title: 'Eclipse', type: 'Court-métrage', year: '2025', role: 'Rôle principal' },
-                  { title: 'Lumière', type: 'Série TV', year: '2024', role: 'Rôle récurrent' },
-                  { title: 'Chanel N°5', type: 'Publicité', year: '2024', role: 'Commercial' },
-                  { title: 'Les Ombres', type: 'Théâtre', year: '2024', role: 'Premier rôle' },
+                  { title: 'On Me', type: 'Clip musical', year: '2025', role: 'Rôle principal', details: 'Valentino & Harrison (DJ)' },
+                  { title: 'UGC', type: 'Publicité', year: '2023', role: 'Comédienne', details: 'Paris' },
+                  { title: 'Friends', type: 'Clip musical', year: '2021', role: 'Participation', details: 'Nathan Morrison' },
+                  { title: 'Mary Shelley', type: 'Long-métrage', year: '2018', role: 'Figurante rapprochée', details: 'Réalisé par Haifaa al-Mansour' },
+                  { title: 'Gainsbourg, Gainsbourg, Faubourg', type: 'Théâtre', year: '2016', role: 'Rôle', details: 'Luxembourg - "Poupée de cire, poupée de son"' },
                 ].map((project, i) => (
                   <div key={i} className="border-b border-gray-100 pb-8">
                     <div className="grid md:grid-cols-3 gap-4">
@@ -163,7 +184,10 @@ export default function Home() {
                         >
                           {project.title}
                         </h3>
-                        <p className="text-gray-600 font-light">{project.role}</p>
+                        <p className="text-gray-600 font-light mb-1">{project.role}</p>
+                        {project.details && (
+                          <p className="text-sm text-gray-400 font-light">{project.details}</p>
+                        )}
                       </div>
                       <div className="flex md:flex-col gap-4 md:gap-1 text-sm text-gray-500 font-light">
                         <span>{project.type}</span>
