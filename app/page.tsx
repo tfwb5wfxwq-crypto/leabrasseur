@@ -3,329 +3,296 @@
 import { useState } from 'react';
 
 export default function Home() {
-  const [view, setView] = useState<'home' | 'modeling' | 'acting'>('home');
+  const [expanded, setExpanded] = useState<'none' | 'modeling' | 'acting'>('none');
+
+  const toggleSection = (section: 'modeling' | 'acting') => {
+    setExpanded(expanded === section ? 'none' : section);
+  };
 
   return (
     <>
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Work+Sans:wght@300;400;500&display=swap');
       `}</style>
 
-      <div className="min-h-screen bg-white relative">
-        {/* HOME */}
-        {view === 'home' && (
-          <main className="min-h-screen flex items-center justify-center px-8 animate-fadeIn">
-            <div className="max-w-2xl w-full text-center space-y-16">
-              {/* Photo */}
-              <div className="max-w-md mx-auto">
-                <img
-                  src="/photos/IMG_4302.jpg"
-                  alt="Lea Brasseur"
-                  className="w-full aspect-[3/4] object-cover shadow-2xl"
-                />
-              </div>
-
-              {/* Nom */}
-              <div>
-                <h1
-                  className="text-6xl md:text-7xl mb-4"
-                  style={{ fontFamily: "'Cinzel', serif", fontWeight: 500 }}
-                >
-                  Lea Brasseur
-                </h1>
-                <div className="w-20 h-px bg-black mx-auto mb-6"></div>
-                <p
-                  className="text-base text-gray-600"
-                  style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 300 }}
-                >
-                  Mannequin & Comédienne
-                </p>
-                <p
-                  className="text-xs uppercase tracking-widest text-gray-400 mt-2"
-                  style={{ fontFamily: "'Raleway', sans-serif" }}
-                >
-                  Paris
-                </p>
-              </div>
-
-              {/* Catégories */}
-              <div className="flex gap-8 justify-center pt-8">
-                <button
-                  onClick={() => setView('modeling')}
-                  className="group relative overflow-hidden px-14 py-6 border-2 border-black hover:bg-black transition-all duration-300"
-                >
-                  <span
-                    className="relative text-sm uppercase tracking-widest group-hover:text-white transition-colors"
-                    style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}
-                  >
-                    Mannequin
-                  </span>
-                </button>
-
-                <button
-                  onClick={() => setView('acting')}
-                  className="group relative overflow-hidden px-14 py-6 border-2 border-black hover:bg-black transition-all duration-300"
-                >
-                  <span
-                    className="relative text-sm uppercase tracking-widest group-hover:text-white transition-colors"
-                    style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}
-                  >
-                    Comédie
-                  </span>
-                </button>
-              </div>
-            </div>
-          </main>
-        )}
-
-        {/* MANNEQUIN */}
-        {view === 'modeling' && (
-          <div className="min-h-screen animate-slideIn">
-            {/* Bouton fermer */}
-            <button
-              onClick={() => setView('home')}
-              className="fixed top-8 right-8 z-50 w-12 h-12 border-2 border-black hover:bg-black hover:text-white transition-all flex items-center justify-center text-2xl"
+      <div className="min-h-screen bg-white">
+        {/* Header fixe */}
+        <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
+          <div className="max-w-6xl mx-auto px-8 py-8 text-center">
+            <h1
+              className="text-4xl mb-3"
+              style={{ fontFamily: "'Playfair Display', serif", fontWeight: 600 }}
             >
-              ×
-            </button>
-
-            {/* Bouton switcher vers Comédie */}
-            <button
-              onClick={() => setView('acting')}
-              className="fixed top-8 left-8 z-50 text-sm uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity"
-              style={{ fontFamily: "'Raleway', sans-serif" }}
+              Lea Brasseur
+            </h1>
+            <p
+              className="text-xs uppercase tracking-widest text-gray-500"
+              style={{ fontFamily: "'Work Sans', sans-serif" }}
             >
-              → Comédie
-            </button>
-
-            <div className="pt-32 pb-20 px-8">
-              <div className="max-w-6xl mx-auto">
-                {/* Titre */}
-                <div className="text-center mb-24">
-                  <h2
-                    className="text-6xl mb-6"
-                    style={{ fontFamily: "'Cinzel', serif", fontWeight: 500 }}
-                  >
-                    Mannequin
-                  </h2>
-                  <div className="w-20 h-px bg-black mx-auto"></div>
-                </div>
-
-                {/* Photos */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24">
-                  {[
-                    '/photos/FlorianBoggia_Lea_37.jpg',
-                    '/photos/FlorianBoggia_Lea_40.jpg',
-                    '/photos/IMG_4313 2.jpg',
-                    '/photos/FlorianBoggia_Lea_18.jpg',
-                    '/photos/IMG_4345.jpg',
-                    '/photos/IMG_4278.jpg',
-                    '/photos/IMG_5088.jpg',
-                    '/photos/IMG_4302.jpg',
-                  ].map((src, i) => (
-                    <div key={i} className="aspect-[3/4] overflow-hidden bg-gray-100">
-                      <img
-                        src={src}
-                        alt={`Photo ${i + 1}`}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Expériences */}
-                <div className="max-w-3xl mx-auto text-center space-y-16">
-                  <h3
-                    className="text-4xl mb-12"
-                    style={{ fontFamily: "'Cinzel', serif" }}
-                  >
-                    Expériences
-                  </h3>
-
-                  <div className="border-t-2 border-black pt-12">
-                    <span
-                      className="text-5xl block mb-6"
-                      style={{ fontFamily: "'Cinzel', serif" }}
-                    >
-                      2025
-                    </span>
-                    <p
-                      className="text-lg mb-2"
-                      style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}
-                    >
-                      Campagne digitale et print — Papik
-                    </p>
-                    <p
-                      className="text-sm text-gray-600"
-                      style={{ fontFamily: "'Raleway', sans-serif" }}
-                    >
-                      Test shoots avec Florian Boggia, Karina et Yoann
-                    </p>
-                  </div>
-
-                  <div className="border-t-2 border-black pt-12">
-                    <span
-                      className="text-5xl block mb-6"
-                      style={{ fontFamily: "'Cinzel', serif" }}
-                    >
-                      2021
-                    </span>
-                    <p
-                      className="text-lg mb-2"
-                      style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}
-                    >
-                      Miss Luxembourg
-                    </p>
-                    <p
-                      className="text-sm text-gray-600"
-                      style={{ fontFamily: "'Raleway', sans-serif" }}
-                    >
-                      Défilés au Luxembourg pour Émilie Bolland · Mannequin pour la marque Boger
-                    </p>
-                  </div>
-
-                  <p
-                    className="text-xs uppercase tracking-widest text-gray-400 pt-12"
-                    style={{ fontFamily: "'Raleway', sans-serif" }}
-                  >
-                    Photographie · Florian Boggia
-                  </p>
-                </div>
-              </div>
-            </div>
+              Mannequin & Comédienne
+            </p>
           </div>
-        )}
+        </header>
 
-        {/* COMÉDIE */}
-        {view === 'acting' && (
-          <div className="min-h-screen animate-slideIn">
-            {/* Bouton fermer */}
-            <button
-              onClick={() => setView('home')}
-              className="fixed top-8 right-8 z-50 w-12 h-12 border-2 border-black hover:bg-black hover:text-white transition-all flex items-center justify-center text-2xl"
+        <main className="pt-40 pb-20">
+          {/* Photo - visible quand rien n'est ouvert */}
+          {expanded === 'none' && (
+            <div className="max-w-md mx-auto px-8 mb-16 animate-fadeIn">
+              <img
+                src="/photos/IMG_4302.jpg"
+                alt="Lea Brasseur"
+                className="w-full aspect-[3/4] object-cover shadow-xl"
+              />
+            </div>
+          )}
+
+          {/* Catégories */}
+          <div className="max-w-6xl mx-auto px-8 space-y-6">
+            {/* MANNEQUIN */}
+            <div
+              className={`border-2 border-black overflow-hidden transition-all duration-500 ${
+                expanded === 'modeling' ? 'bg-white' : 'bg-white hover:bg-gray-50'
+              }`}
             >
-              ×
-            </button>
+              <button
+                onClick={() => toggleSection('modeling')}
+                className="w-full p-8 text-center"
+              >
+                <h2
+                  className={`transition-all duration-300 ${
+                    expanded === 'modeling' ? 'text-5xl' : 'text-3xl'
+                  }`}
+                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+                >
+                  Mannequin
+                </h2>
+                <p
+                  className="text-xs uppercase tracking-widest text-gray-400 mt-3"
+                  style={{ fontFamily: "'Work Sans', sans-serif" }}
+                >
+                  {expanded === 'modeling' ? 'Cliquer pour fermer' : 'Cliquer pour ouvrir'}
+                </p>
+              </button>
 
-            {/* Bouton switcher vers Mannequin */}
-            <button
-              onClick={() => setView('modeling')}
-              className="fixed top-8 left-8 z-50 text-sm uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity"
-              style={{ fontFamily: "'Raleway', sans-serif" }}
-            >
-              → Mannequin
-            </button>
-
-            <div className="pt-32 pb-20 px-8">
-              <div className="max-w-5xl mx-auto">
-                {/* Titre */}
-                <div className="text-center mb-24">
-                  <h2
-                    className="text-6xl mb-6"
-                    style={{ fontFamily: "'Cinzel', serif", fontWeight: 500 }}
-                  >
-                    Comédie
-                  </h2>
-                  <div className="w-20 h-px bg-black mx-auto"></div>
-                </div>
-
-                {/* Tape */}
-                <div className="max-w-3xl mx-auto mb-24">
-                  <div className="bg-black shadow-2xl">
-                    <video
-                      controls
-                      preload="metadata"
-                      className="w-full aspect-video"
-                    >
-                      <source src="/videos/monologue.mp4" type="video/mp4" />
-                    </video>
-                  </div>
-                  <div className="text-center mt-10 border-t-2 border-black pt-8">
-                    <h3
-                      className="text-2xl mb-2"
-                      style={{ fontFamily: "'Cinzel', serif" }}
-                    >
-                      Tape Monologue
-                    </h3>
-                    <p
-                      className="text-sm text-gray-600"
-                      style={{ fontFamily: "'Raleway', sans-serif" }}
-                    >
-                      Extrait de travail personnel · 2026
-                    </p>
-                  </div>
-                </div>
-
-                {/* Filmographie */}
-                <div className="max-w-3xl mx-auto text-center">
-                  <h3
-                    className="text-4xl mb-16"
-                    style={{ fontFamily: "'Cinzel', serif" }}
-                  >
-                    Filmographie
-                  </h3>
-
-                  <div className="space-y-12">
+              {/* Contenu Mannequin */}
+              <div
+                className={`transition-all duration-500 overflow-hidden ${
+                  expanded === 'modeling' ? 'max-h-[10000px] opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="p-8 border-t-2 border-black">
+                  {/* Photos */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
                     {[
-                      { title: 'On Me', type: 'Clip musical', year: '2025', role: 'Rôle principal', details: 'Valentino & Harrison (DJ)' },
-                      { title: 'UGC', type: 'Publicité', year: '2023', role: 'Comédienne', details: 'Paris' },
-                      { title: 'Friends', type: 'Clip musical', year: '2021', role: 'Participation', details: 'Nathan Morrison' },
-                      { title: 'Mary Shelley', type: 'Long-métrage', year: '2018', role: 'Figurante rapprochée', details: 'Réalisé par Haifaa al-Mansour' },
-                      { title: 'Gainsbourg, Gainsbourg, Faubourg', type: 'Théâtre', year: '2016', role: 'Rôle', details: 'Luxembourg - "Poupée de cire, poupée de son"' },
-                    ].map((project, i) => (
-                      <div key={i} className="border-t-2 border-black pt-10">
-                        <span
-                          className="text-4xl block mb-4"
-                          style={{ fontFamily: "'Cinzel', serif" }}
-                        >
-                          {project.year}
-                        </span>
-                        <h4
-                          className="text-3xl mb-3"
-                          style={{ fontFamily: "'Cinzel', serif" }}
-                        >
-                          {project.title}
-                        </h4>
-                        <p
-                          className="text-xs uppercase tracking-widest text-gray-400 mb-3"
-                          style={{ fontFamily: "'Raleway', sans-serif" }}
-                        >
-                          {project.type}
-                        </p>
-                        <p
-                          className="text-base mb-2"
-                          style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}
-                        >
-                          {project.role}
-                        </p>
-                        {project.details && (
-                          <p
-                            className="text-sm text-gray-600"
-                            style={{ fontFamily: "'Raleway', sans-serif" }}
-                          >
-                            {project.details}
-                          </p>
-                        )}
+                      '/photos/FlorianBoggia_Lea_37.jpg',
+                      '/photos/FlorianBoggia_Lea_40.jpg',
+                      '/photos/IMG_4313 2.jpg',
+                      '/photos/FlorianBoggia_Lea_18.jpg',
+                      '/photos/IMG_4345.jpg',
+                      '/photos/IMG_4278.jpg',
+                      '/photos/IMG_5088.jpg',
+                      '/photos/IMG_4302.jpg',
+                    ].map((src, i) => (
+                      <div key={i} className="aspect-[3/4] overflow-hidden">
+                        <img
+                          src={src}
+                          alt={`Photo ${i + 1}`}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        />
                       </div>
                     ))}
                   </div>
+
+                  {/* Expériences */}
+                  <div className="max-w-3xl mx-auto text-center space-y-12">
+                    <h3
+                      className="text-3xl mb-8"
+                      style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+                    >
+                      Expériences
+                    </h3>
+
+                    <div className="border-t border-gray-300 pt-8">
+                      <span
+                        className="text-4xl block mb-4"
+                        style={{ fontFamily: "'Playfair Display', serif" }}
+                      >
+                        2025
+                      </span>
+                      <p
+                        className="text-lg mb-2"
+                        style={{ fontFamily: "'Work Sans', sans-serif", fontWeight: 500 }}
+                      >
+                        Campagne digitale et print — Papik
+                      </p>
+                      <p
+                        className="text-sm text-gray-600"
+                        style={{ fontFamily: "'Work Sans', sans-serif" }}
+                      >
+                        Test shoots avec Florian Boggia, Karina et Yoann
+                      </p>
+                    </div>
+
+                    <div className="border-t border-gray-300 pt-8">
+                      <span
+                        className="text-4xl block mb-4"
+                        style={{ fontFamily: "'Playfair Display', serif" }}
+                      >
+                        2021
+                      </span>
+                      <p
+                        className="text-lg mb-2"
+                        style={{ fontFamily: "'Work Sans', sans-serif", fontWeight: 500 }}
+                      >
+                        Miss Luxembourg
+                      </p>
+                      <p
+                        className="text-sm text-gray-600"
+                        style={{ fontFamily: "'Work Sans', sans-serif" }}
+                      >
+                        Défilés au Luxembourg pour Émilie Bolland · Mannequin pour la marque Boger
+                      </p>
+                    </div>
+
+                    <p
+                      className="text-xs uppercase tracking-widest text-gray-400 pt-8"
+                      style={{ fontFamily: "'Work Sans', sans-serif" }}
+                    >
+                      Photographie · Florian Boggia
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* COMÉDIE */}
+            <div
+              className={`border-2 border-black overflow-hidden transition-all duration-500 ${
+                expanded === 'acting' ? 'bg-white' : 'bg-white hover:bg-gray-50'
+              }`}
+            >
+              <button
+                onClick={() => toggleSection('acting')}
+                className="w-full p-8 text-center"
+              >
+                <h2
+                  className={`transition-all duration-300 ${
+                    expanded === 'acting' ? 'text-5xl' : 'text-3xl'
+                  }`}
+                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+                >
+                  Comédie
+                </h2>
+                <p
+                  className="text-xs uppercase tracking-widest text-gray-400 mt-3"
+                  style={{ fontFamily: "'Work Sans', sans-serif" }}
+                >
+                  {expanded === 'acting' ? 'Cliquer pour fermer' : 'Cliquer pour ouvrir'}
+                </p>
+              </button>
+
+              {/* Contenu Comédie */}
+              <div
+                className={`transition-all duration-500 overflow-hidden ${
+                  expanded === 'acting' ? 'max-h-[10000px] opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="p-8 border-t-2 border-black">
+                  {/* Tape */}
+                  <div className="max-w-3xl mx-auto mb-16">
+                    <div className="bg-black shadow-xl">
+                      <video
+                        controls
+                        preload="metadata"
+                        className="w-full aspect-video"
+                      >
+                        <source src="/videos/monologue.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                    <div className="text-center mt-8 border-t border-gray-300 pt-8">
+                      <h3
+                        className="text-2xl mb-2"
+                        style={{ fontFamily: "'Playfair Display', serif" }}
+                      >
+                        Tape Monologue
+                      </h3>
+                      <p
+                        className="text-sm text-gray-600"
+                        style={{ fontFamily: "'Work Sans', sans-serif" }}
+                      >
+                        Extrait de travail personnel · 2026
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Filmographie */}
+                  <div className="max-w-3xl mx-auto text-center">
+                    <h3
+                      className="text-3xl mb-12"
+                      style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+                    >
+                      Filmographie
+                    </h3>
+
+                    <div className="space-y-10">
+                      {[
+                        { title: 'On Me', type: 'Clip musical', year: '2025', role: 'Rôle principal', details: 'Valentino & Harrison (DJ)' },
+                        { title: 'UGC', type: 'Publicité', year: '2023', role: 'Comédienne', details: 'Paris' },
+                        { title: 'Friends', type: 'Clip musical', year: '2021', role: 'Participation', details: 'Nathan Morrison' },
+                        { title: 'Mary Shelley', type: 'Long-métrage', year: '2018', role: 'Figurante rapprochée', details: 'Réalisé par Haifaa al-Mansour' },
+                        { title: 'Gainsbourg, Gainsbourg, Faubourg', type: 'Théâtre', year: '2016', role: 'Rôle', details: 'Luxembourg - "Poupée de cire, poupée de son"' },
+                      ].map((project, i) => (
+                        <div key={i} className="border-t border-gray-300 pt-8">
+                          <span
+                            className="text-3xl block mb-3"
+                            style={{ fontFamily: "'Playfair Display', serif" }}
+                          >
+                            {project.year}
+                          </span>
+                          <h4
+                            className="text-2xl mb-2"
+                            style={{ fontFamily: "'Playfair Display', serif" }}
+                          >
+                            {project.title}
+                          </h4>
+                          <p
+                            className="text-xs uppercase tracking-widest text-gray-400 mb-2"
+                            style={{ fontFamily: "'Work Sans', sans-serif" }}
+                          >
+                            {project.type}
+                          </p>
+                          <p
+                            className="text-base mb-1"
+                            style={{ fontFamily: "'Work Sans', sans-serif", fontWeight: 500 }}
+                          >
+                            {project.role}
+                          </p>
+                          {project.details && (
+                            <p
+                              className="text-sm text-gray-600"
+                              style={{ fontFamily: "'Work Sans', sans-serif" }}
+                            >
+                              {project.details}
+                            </p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        )}
+        </main>
 
-        {/* Footer */}
-        {view !== 'home' && (
-          <footer className="py-12 border-t border-gray-100">
-            <p
-              className="text-center text-xs uppercase tracking-widest text-gray-300"
-              style={{ fontFamily: "'Raleway', sans-serif" }}
-            >
-              © 2026 Lea Brasseur
-            </p>
-          </footer>
-        )}
+        <footer className="py-12 border-t border-gray-100">
+          <p
+            className="text-center text-xs uppercase tracking-widest text-gray-300"
+            style={{ fontFamily: "'Work Sans', sans-serif" }}
+          >
+            © 2026 Lea Brasseur
+          </p>
+        </footer>
       </div>
     </>
   );
