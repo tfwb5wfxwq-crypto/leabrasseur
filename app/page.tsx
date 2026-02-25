@@ -41,9 +41,9 @@ export default function Home() {
 
         {/* HOME */}
         {view === 'home' && (
-          <main className="min-h-screen flex items-center justify-center px-4 pt-32 pb-20">
-            <div className="w-full max-w-5xl">
-              <div className="grid md:grid-cols-[1.2fr,320px] gap-12 items-center">
+          <main className="min-h-screen flex items-center justify-center px-4 pt-48 pb-20">
+            <div className="w-full max-w-4xl">
+              <div className="grid md:grid-cols-[1.5fr,260px] gap-12 items-center">
                 {/* Left: Text */}
                 <div className="space-y-8">
                   <div>
