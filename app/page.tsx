@@ -4,116 +4,123 @@ import { useState } from 'react';
 
 export default function Home() {
   const [view, setView] = useState<'home' | 'modeling' | 'acting'>('home');
-  const [hoveredSide, setHoveredSide] = useState<'left' | 'right' | null>(null);
+  const [transitioning, setTransitioning] = useState(false);
+
+  const handleTransition = (newView: 'modeling' | 'acting') => {
+    setTransitioning(true);
+    setTimeout(() => {
+      setView(newView);
+      setTransitioning(false);
+    }, 800);
+  };
 
   return (
     <>
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap');
+
+        @keyframes scaleIn {
+          from {
+            transform: scale(0.5);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideUp {
+          from {
+            transform: translateY(60px);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+
+        .animate-scale-in {
+          animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .animate-slide-up {
+          animation: slideUp 0.6s ease-out forwards;
+        }
       `}</style>
 
       <div className="min-h-screen bg-white">
-        {/* LANDING - Split Reveal */}
+        {/* LANDING */}
         {view === 'home' && (
-          <main className="h-screen relative overflow-hidden">
-            {/* Split gauche - Mannequin */}
-            <div
-              className="absolute inset-0 w-1/2 left-0 cursor-pointer transition-all duration-700"
-              onMouseEnter={() => setHoveredSide('left')}
-              onMouseLeave={() => setHoveredSide(null)}
-              onClick={() => setView('modeling')}
+          <main className="h-screen flex relative">
+            {/* MANNEQUIN - Gauche */}
+            <button
+              onClick={() => handleTransition('modeling')}
+              className="w-1/2 bg-black text-white relative overflow-hidden group transition-all duration-500 hover:w-[55%]"
             >
-              <div
-                className={`absolute inset-0 bg-cover bg-center transition-all duration-700 ${
-                  hoveredSide === 'left' ? 'scale-105 opacity-100' : 'opacity-0 scale-100'
-                }`}
-                style={{ backgroundImage: 'url(/photos/IMG_4302.jpg)' }}
-              ></div>
-              <div
-                className={`absolute inset-0 bg-black transition-opacity duration-700 ${
-                  hoveredSide === 'left' ? 'opacity-60' : 'opacity-0'
-                }`}
-              ></div>
-              <div
-                className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
-                  hoveredSide === 'left' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
-                <div className="text-white text-center">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center">
                   <h2
-                    className="text-6xl mb-6"
-                    style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}
+                    className="text-[10rem] leading-none mb-8 group-hover:scale-110 transition-transform duration-500"
+                    style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                   >
-                    Mannequin
+                    MANNEQUIN
                   </h2>
-                  <div className="w-16 h-px bg-white mx-auto mb-4"></div>
+                  <div className="w-32 h-1 bg-white mx-auto mb-6 group-hover:w-48 transition-all duration-500"></div>
                   <p
-                    className="text-sm uppercase tracking-widest opacity-80"
-                    style={{ fontFamily: "'Outfit', sans-serif" }}
+                    className="text-sm tracking-[0.4em] uppercase opacity-60 group-hover:opacity-100 transition-opacity"
+                    style={{ fontFamily: "'Inter', sans-serif" }}
                   >
-                    Portfolio
+                    Cliquer pour découvrir
                   </p>
                 </div>
               </div>
-            </div>
 
-            {/* Split droite - Comédie */}
-            <div
-              className="absolute inset-0 w-1/2 right-0 cursor-pointer transition-all duration-700"
-              onMouseEnter={() => setHoveredSide('right')}
-              onMouseLeave={() => setHoveredSide(null)}
-              onClick={() => setView('acting')}
+              {/* Effet overlay */}
+              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+            </button>
+
+            {/* COMÉDIE - Droite */}
+            <button
+              onClick={() => handleTransition('acting')}
+              className="w-1/2 bg-white text-black relative overflow-hidden group transition-all duration-500 hover:w-[55%] border-l-2 border-black"
             >
-              <div
-                className={`absolute inset-0 bg-cover bg-center transition-all duration-700 ${
-                  hoveredSide === 'right' ? 'scale-105 opacity-100' : 'opacity-0 scale-100'
-                }`}
-                style={{ backgroundImage: 'url(/photos/FlorianBoggia_Lea_37.jpg)' }}
-              ></div>
-              <div
-                className={`absolute inset-0 bg-black transition-opacity duration-700 ${
-                  hoveredSide === 'right' ? 'opacity-60' : 'opacity-0'
-                }`}
-              ></div>
-              <div
-                className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
-                  hoveredSide === 'right' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
-                <div className="text-white text-center">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center">
                   <h2
-                    className="text-6xl mb-6"
-                    style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}
+                    className="text-[10rem] leading-none mb-8 group-hover:scale-110 transition-transform duration-500"
+                    style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                   >
-                    Comédie
+                    COMÉDIE
                   </h2>
-                  <div className="w-16 h-px bg-white mx-auto mb-4"></div>
+                  <div className="w-32 h-1 bg-black mx-auto mb-6 group-hover:w-48 transition-all duration-500"></div>
                   <p
-                    className="text-sm uppercase tracking-widest opacity-80"
-                    style={{ fontFamily: "'Outfit', sans-serif" }}
+                    className="text-sm tracking-[0.4em] uppercase opacity-60 group-hover:opacity-100 transition-opacity"
+                    style={{ fontFamily: "'Inter', sans-serif" }}
                   >
-                    Filmographie
+                    Cliquer pour découvrir
                   </p>
                 </div>
               </div>
-            </div>
 
-            {/* Ligne centrale */}
-            <div className="absolute top-0 bottom-0 left-1/2 w-px bg-gray-300 z-10"></div>
+              {/* Effet overlay */}
+              <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+            </button>
 
-            {/* Nom centré */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-center pointer-events-none">
+            {/* Logo centré */}
+            <div className="absolute top-12 left-1/2 -translate-x-1/2 z-10 text-center pointer-events-none">
               <h1
-                className="text-7xl mb-6 text-black"
-                style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600 }}
+                className="text-5xl mb-2 mix-blend-difference text-white"
+                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
               >
-                Lea Brasseur
+                LEA BRASSEUR
               </h1>
               <p
-                className="text-sm uppercase tracking-widest text-gray-600"
-                style={{ fontFamily: "'Outfit', sans-serif" }}
+                className="text-xs tracking-[0.3em] uppercase mix-blend-difference text-white opacity-60"
+                style={{ fontFamily: "'Inter', sans-serif" }}
               >
-                Mannequin & Comédienne · Paris
+                Paris
               </p>
             </div>
           </main>
@@ -121,38 +128,38 @@ export default function Home() {
 
         {/* MANNEQUIN */}
         {view === 'modeling' && (
-          <div className="min-h-screen animate-fadeIn">
+          <div className={`min-h-screen ${transitioning ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}>
             {/* Header */}
-            <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm">
+            <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white">
               <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
                 <button
                   onClick={() => setView('home')}
-                  className="text-2xl hover:opacity-60 transition-opacity"
-                  style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}
+                  className="text-3xl hover:opacity-60 transition-opacity"
+                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                 >
-                  Lea Brasseur
+                  LEA BRASSEUR
                 </button>
                 <button
-                  onClick={() => setView('acting')}
-                  className="text-sm uppercase tracking-widest hover:opacity-60 transition-opacity"
-                  style={{ fontFamily: "'Outfit', sans-serif" }}
+                  onClick={() => handleTransition('acting')}
+                  className="text-sm tracking-[0.3em] uppercase hover:opacity-60 transition-opacity"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   → Comédie
                 </button>
               </div>
             </header>
 
-            <main className="pt-32 pb-20">
-              <div className="max-w-6xl mx-auto px-8">
+            <main className="pt-32 pb-20 bg-black text-white">
+              <div className="max-w-7xl mx-auto px-8">
                 {/* Titre */}
-                <div className="text-center mb-20">
+                <div className="text-center mb-24 animate-scale-in">
                   <h2
-                    className="text-7xl mb-6"
-                    style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}
+                    className="text-[8rem] leading-none mb-6"
+                    style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                   >
-                    Mannequin
+                    MANNEQUIN
                   </h2>
-                  <div className="w-24 h-px bg-black mx-auto"></div>
+                  <div className="w-32 h-1 bg-white mx-auto"></div>
                 </div>
 
                 {/* Photos */}
@@ -169,77 +176,83 @@ export default function Home() {
                   ].map((src, i) => (
                     <div
                       key={i}
-                      className="aspect-[3/4] overflow-hidden bg-gray-100"
-                      style={{ animationDelay: `${i * 0.1}s` }}
+                      className="aspect-[3/4] overflow-hidden bg-gray-900 animate-slide-up"
+                      style={{ animationDelay: `${i * 0.1}s`, opacity: 0 }}
                     >
                       <img
                         src={src}
                         alt={`Photo ${i + 1}`}
-                        className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                        className="w-full h-full object-cover hover:scale-110 transition-transform duration-700 grayscale hover:grayscale-0"
                       />
                     </div>
                   ))}
                 </div>
 
                 {/* Expériences */}
-                <div className="max-w-4xl mx-auto">
-                  <div className="text-center mb-16">
+                <div className="max-w-5xl mx-auto">
+                  <div className="text-center mb-20">
                     <h3
-                      className="text-5xl mb-4"
-                      style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                      className="text-6xl mb-6"
+                      style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                     >
-                      Expériences
+                      EXPÉRIENCES
                     </h3>
-                    <div className="w-16 h-px bg-black mx-auto"></div>
+                    <div className="w-24 h-1 bg-white mx-auto"></div>
                   </div>
 
-                  <div className="space-y-16">
-                    <div className="text-center border-t border-gray-200 pt-12">
+                  <div className="grid md:grid-cols-2 gap-12">
+                    <div className="text-center p-10 border-2 border-white hover:bg-white hover:text-black transition-all duration-300">
                       <span
-                        className="text-6xl block mb-6"
-                        style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                        className="text-7xl block mb-6"
+                        style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                       >
                         2025
                       </span>
                       <h4
-                        className="text-2xl mb-3"
-                        style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 500 }}
+                        className="text-2xl mb-4"
+                        style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600 }}
                       >
-                        Campagne digitale et print — Papik
+                        Campagne Papik
                       </h4>
                       <p
-                        className="text-gray-600"
-                        style={{ fontFamily: "'Outfit', sans-serif" }}
+                        className="text-sm mb-3"
+                        style={{ fontFamily: "'Inter', sans-serif" }}
                       >
-                        Test shoots avec Florian Boggia, Karina et Yoann
+                        Digital & Print
+                      </p>
+                      <p
+                        className="text-xs opacity-60"
+                        style={{ fontFamily: "'Inter', sans-serif" }}
+                      >
+                        Florian Boggia · Karina · Yoann
                       </p>
                     </div>
 
-                    <div className="text-center border-t border-gray-200 pt-12">
+                    <div className="text-center p-10 border-2 border-white hover:bg-white hover:text-black transition-all duration-300">
                       <span
-                        className="text-6xl block mb-6"
-                        style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                        className="text-7xl block mb-6"
+                        style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                       >
                         2021
                       </span>
                       <h4
-                        className="text-2xl mb-3"
-                        style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 500 }}
+                        className="text-2xl mb-4"
+                        style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600 }}
                       >
                         Miss Luxembourg
                       </h4>
                       <p
-                        className="text-gray-600"
-                        style={{ fontFamily: "'Outfit', sans-serif" }}
+                        className="text-sm"
+                        style={{ fontFamily: "'Inter', sans-serif" }}
                       >
-                        Défilés au Luxembourg pour Émilie Bolland · Mannequin pour la marque Boger
+                        Défilés Luxembourg · Émilie Bolland · Marque Boger
                       </p>
                     </div>
                   </div>
 
                   <p
-                    className="text-center text-xs uppercase tracking-widest text-gray-400 mt-20"
-                    style={{ fontFamily: "'Outfit', sans-serif" }}
+                    className="text-center text-xs uppercase tracking-widest opacity-40 mt-20"
+                    style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     Photographie · Florian Boggia
                   </p>
@@ -251,21 +264,21 @@ export default function Home() {
 
         {/* COMÉDIE */}
         {view === 'acting' && (
-          <div className="min-h-screen animate-fadeIn">
+          <div className={`min-h-screen ${transitioning ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}>
             {/* Header */}
-            <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm">
+            <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b-2 border-black">
               <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
                 <button
                   onClick={() => setView('home')}
-                  className="text-2xl hover:opacity-60 transition-opacity"
-                  style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}
+                  className="text-3xl hover:opacity-60 transition-opacity"
+                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                 >
-                  Lea Brasseur
+                  LEA BRASSEUR
                 </button>
                 <button
-                  onClick={() => setView('modeling')}
-                  className="text-sm uppercase tracking-widest hover:opacity-60 transition-opacity"
-                  style={{ fontFamily: "'Outfit', sans-serif" }}
+                  onClick={() => handleTransition('modeling')}
+                  className="text-sm tracking-[0.3em] uppercase hover:opacity-60 transition-opacity"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   → Mannequin
                 </button>
@@ -273,21 +286,21 @@ export default function Home() {
             </header>
 
             <main className="pt-32 pb-20">
-              <div className="max-w-5xl mx-auto px-8">
+              <div className="max-w-6xl mx-auto px-8">
                 {/* Titre */}
-                <div className="text-center mb-20">
+                <div className="text-center mb-24 animate-scale-in">
                   <h2
-                    className="text-7xl mb-6"
-                    style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}
+                    className="text-[8rem] leading-none mb-6"
+                    style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                   >
-                    Comédie
+                    COMÉDIE
                   </h2>
-                  <div className="w-24 h-px bg-black mx-auto"></div>
+                  <div className="w-32 h-1 bg-black mx-auto"></div>
                 </div>
 
                 {/* Vidéo */}
-                <div className="max-w-3xl mx-auto mb-24">
-                  <div className="bg-black shadow-2xl overflow-hidden">
+                <div className="max-w-4xl mx-auto mb-32 animate-slide-up" style={{ animationDelay: '0.2s', opacity: 0 }}>
+                  <div className="bg-black shadow-2xl">
                     <video
                       controls
                       preload="metadata"
@@ -296,16 +309,16 @@ export default function Home() {
                       <source src="/videos/monologue.mp4" type="video/mp4" />
                     </video>
                   </div>
-                  <div className="text-center mt-10">
+                  <div className="text-center mt-12 p-8 border-2 border-black">
                     <h3
-                      className="text-3xl mb-3"
-                      style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                      className="text-4xl mb-3"
+                      style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                     >
-                      Tape Monologue
+                      TAPE MONOLOGUE
                     </h3>
                     <p
-                      className="text-sm text-gray-600"
-                      style={{ fontFamily: "'Outfit', sans-serif" }}
+                      className="text-sm"
+                      style={{ fontFamily: "'Inter', sans-serif" }}
                     >
                       Extrait de travail personnel · 2026
                     </p>
@@ -313,18 +326,18 @@ export default function Home() {
                 </div>
 
                 {/* Filmographie */}
-                <div className="max-w-3xl mx-auto">
-                  <div className="text-center mb-16">
+                <div className="max-w-4xl mx-auto">
+                  <div className="text-center mb-20">
                     <h3
-                      className="text-5xl mb-4"
-                      style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                      className="text-6xl mb-6"
+                      style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                     >
-                      Filmographie
+                      FILMOGRAPHIE
                     </h3>
-                    <div className="w-16 h-px bg-black mx-auto"></div>
+                    <div className="w-24 h-1 bg-black mx-auto"></div>
                   </div>
 
-                  <div className="space-y-12">
+                  <div className="space-y-8">
                     {[
                       { title: 'On Me', type: 'Clip musical', year: '2025', role: 'Rôle principal', details: 'Valentino & Harrison (DJ)' },
                       { title: 'UGC', type: 'Publicité', year: '2023', role: 'Comédienne', details: 'Paris' },
@@ -332,39 +345,46 @@ export default function Home() {
                       { title: 'Mary Shelley', type: 'Long-métrage', year: '2018', role: 'Figurante rapprochée', details: 'Réalisé par Haifaa al-Mansour' },
                       { title: 'Gainsbourg, Gainsbourg, Faubourg', type: 'Théâtre', year: '2016', role: 'Rôle', details: 'Luxembourg - "Poupée de cire, poupée de son"' },
                     ].map((project, i) => (
-                      <div key={i} className="text-center border-t border-gray-200 pt-10">
-                        <span
-                          className="text-5xl block mb-4"
-                          style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                        >
-                          {project.year}
-                        </span>
-                        <h4
-                          className="text-3xl mb-3"
-                          style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                        >
-                          {project.title}
-                        </h4>
-                        <p
-                          className="text-xs uppercase tracking-widest text-gray-400 mb-3"
-                          style={{ fontFamily: "'Outfit', sans-serif" }}
-                        >
-                          {project.type}
-                        </p>
-                        <p
-                          className="text-lg mb-2"
-                          style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 500 }}
-                        >
-                          {project.role}
-                        </p>
-                        {project.details && (
-                          <p
-                            className="text-sm text-gray-600"
-                            style={{ fontFamily: "'Outfit', sans-serif" }}
+                      <div
+                        key={i}
+                        className="grid md:grid-cols-[140px,1fr] gap-8 p-8 border-2 border-black hover:bg-black hover:text-white transition-all duration-300"
+                      >
+                        <div className="text-center md:text-left">
+                          <span
+                            className="text-6xl block"
+                            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                           >
-                            {project.details}
+                            {project.year}
+                          </span>
+                        </div>
+                        <div>
+                          <h4
+                            className="text-4xl mb-2"
+                            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                          >
+                            {project.title}
+                          </h4>
+                          <p
+                            className="text-xs uppercase tracking-widest opacity-60 mb-3"
+                            style={{ fontFamily: "'Inter', sans-serif" }}
+                          >
+                            {project.type}
                           </p>
-                        )}
+                          <p
+                            className="text-base mb-2"
+                            style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600 }}
+                          >
+                            {project.role}
+                          </p>
+                          {project.details && (
+                            <p
+                              className="text-sm opacity-60"
+                              style={{ fontFamily: "'Inter', sans-serif" }}
+                            >
+                              {project.details}
+                            </p>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -376,10 +396,10 @@ export default function Home() {
 
         {/* Footer */}
         {view !== 'home' && (
-          <footer className="py-12 border-t border-gray-100">
+          <footer className={`py-12 border-t-2 ${view === 'modeling' ? 'border-white bg-black text-white' : 'border-black'}`}>
             <p
-              className="text-center text-xs uppercase tracking-widest text-gray-300"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
+              className="text-center text-xs uppercase tracking-widest opacity-40"
+              style={{ fontFamily: "'Inter', sans-serif" }}
             >
               © 2026 Lea Brasseur
             </p>
