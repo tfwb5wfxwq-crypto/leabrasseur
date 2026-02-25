@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import * as THREE from 'three';
 import { ViewMode } from '@/app/page';
 
 interface HeroSplitProps {
@@ -14,80 +13,7 @@ export default function HeroSplit({ setViewMode }: HeroSplitProps) {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
-  const canvasLeftRef = useRef<HTMLCanvasElement>(null);
-  const canvasRightRef = useRef<HTMLCanvasElement>(null);
   const [hoveredSide, setHoveredSide] = useState<'left' | 'right' | null>(null);
-
-  // Three.js particles for each side
-  useEffect(() => {
-    if (!canvasLeftRef.current || !canvasRightRef.current) return;
-
-    const createParticleScene = (canvas: HTMLCanvasElement, color: string) => {
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 2 / window.innerHeight, 0.1, 1000);
-      camera.position.z = 5;
-
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-      renderer.setSize(window.innerWidth / 2, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-      const geometry = new THREE.BufferGeometry();
-      const count = 800;
-      const positions = new Float32Array(count * 3);
-
-      for (let i = 0; i < count * 3; i++) {
-        positions[i] = (Math.random() - 0.5) * 10;
-      }
-
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-      const material = new THREE.PointsMaterial({
-        size: 0.015,
-        color,
-        transparent: true,
-        opacity: 0.6,
-        blending: THREE.AdditiveBlending,
-      });
-
-      const particles = new THREE.Points(geometry, material);
-      scene.add(particles);
-
-      const animate = () => {
-        requestAnimationFrame(animate);
-        particles.rotation.y += 0.0005;
-        particles.rotation.x += 0.0002;
-        renderer.render(scene, camera);
-      };
-
-      animate();
-
-      return { renderer, camera };
-    };
-
-    const leftScene = createParticleScene(canvasLeftRef.current, '#ec4899');
-    const rightScene = createParticleScene(canvasRightRef.current, '#3b82f6');
-
-    const handleResize = () => {
-      const width = window.innerWidth / 2;
-      const height = window.innerHeight;
-      
-      leftScene.camera.aspect = width / height;
-      leftScene.camera.updateProjectionMatrix();
-      leftScene.renderer.setSize(width, height);
-
-      rightScene.camera.aspect = width / height;
-      rightScene.camera.updateProjectionMatrix();
-      rightScene.renderer.setSize(width, height);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      leftScene.renderer.dispose();
-      rightScene.renderer.dispose();
-    };
-  }, []);
 
   // Hover animations
   useEffect(() => {
@@ -108,118 +34,117 @@ export default function HeroSplit({ setViewMode }: HeroSplitProps) {
     }
   }, [hoveredSide]);
 
-  const handleClick = (side: 'left' | 'right') => {
-    const target = side === 'left' ? leftRef.current : rightRef.current;
-    
-    gsap.to(target, {
-      width: '100%',
-      duration: 1.2,
-      ease: 'power4.inOut',
-      onComplete: () => {
-        setViewMode(side === 'left' ? 'modeling' : 'acting');
-      },
-    });
-
-    gsap.to(side === 'left' ? rightRef.current : leftRef.current, {
-      width: '0%',
-      duration: 1.2,
-      ease: 'power4.inOut',
-    });
-
-    gsap.to(dividerRef.current, {
+  // Initial fade in animation
+  useEffect(() => {
+    gsap.from('.fade-in', {
       opacity: 0,
-      duration: 0.6,
+      y: 30,
+      duration: 1.2,
+      ease: 'power3.out',
+      stagger: 0.2,
+      delay: 0.3,
+    });
+  }, []);
+
+  const handleClick = (mode: ViewMode) => {
+    if (!containerRef.current) return;
+
+    // Fade out animation before transition
+    gsap.to(containerRef.current, {
+      opacity: 0,
+      duration: 0.5,
+      ease: 'power2.inOut',
+      onComplete: () => setViewMode(mode),
     });
   };
 
   return (
-    <div ref={containerRef} className="relative h-screen w-screen overflow-hidden flex">
-      {/* LEFT SIDE - Mannequinat */}
+    <div ref={containerRef} className="relative h-screen overflow-hidden bg-black">
+      {/* Left side - Mannequin */}
       <div
         ref={leftRef}
-        className="relative h-full cursor-pointer transition-all"
-        style={{ width: '50%' }}
+        className="absolute left-0 top-0 h-full w-1/2 cursor-pointer overflow-hidden transition-all"
         onMouseEnter={() => setHoveredSide('left')}
         onMouseLeave={() => setHoveredSide(null)}
-        onClick={() => handleClick('left')}
+        onClick={() => handleClick('modeling')}
       >
-        <canvas
-          ref={canvasLeftRef}
-          className="absolute inset-0 w-full h-full"
-          style={{ pointerEvents: 'none' }}
-        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 via-transparent to-transparent opacity-60" />
 
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-black/60 to-pink-900/40" />
+        {/* Content */}
+        <div className="relative z-10 flex h-full flex-col items-center justify-center p-12 text-center">
+          <h2 className="fade-in mb-4 text-7xl font-light tracking-wider text-white">
+            LÉA
+            <br />
+            <span className="text-8xl font-thin">BRASSEUR</span>
+          </h2>
+          <div className="fade-in mb-8 h-px w-24 bg-gradient-to-r from-transparent via-pink-400 to-transparent" />
+          <p className="fade-in text-2xl font-light tracking-[0.3em] text-pink-200">
+            MANNEQUIN
+          </p>
 
-        <div className="relative z-10 h-full flex flex-col items-center justify-center p-12">
-          <div className="text-center transform transition-transform duration-700" style={{
-            transform: hoveredSide === 'left' ? 'scale(1.1)' : 'scale(1)',
-          }}>
-            <h2 className="text-8xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-              Mannequinat
-            </h2>
-            <p className="text-2xl text-white/70 mb-8 font-light">
-              Mode • Editorial • Haute Couture
-            </p>
-            <div className={`inline-block px-8 py-4 rounded-full backdrop-blur-xl bg-white/10 border border-white/20 transition-all duration-500 ${
-              hoveredSide === 'left' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}>
-              <span className="text-white font-semibold">Découvrir →</span>
-            </div>
+          {/* Hover indicator */}
+          <div className={`fade-in mt-12 text-sm font-light tracking-widest text-white/60 transition-opacity ${
+            hoveredSide === 'left' ? 'opacity-100' : 'opacity-0'
+          }`}>
+            VOIR LE PORTFOLIO →
           </div>
+        </div>
+
+        {/* Subtle animated gradient */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute -left-1/2 -top-1/2 h-[200%] w-[200%] animate-spin-slow bg-gradient-radial from-pink-500/10 via-transparent to-transparent" />
         </div>
       </div>
 
-      {/* DIVIDER */}
-      <div
-        ref={dividerRef}
-        className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/50 to-transparent z-20"
-        style={{ transform: 'translateX(-50%)' }}
-      />
-
-      {/* RIGHT SIDE - Comédie */}
+      {/* Right side - Actrice */}
       <div
         ref={rightRef}
-        className="relative h-full cursor-pointer transition-all"
-        style={{ width: '50%' }}
+        className="absolute right-0 top-0 h-full w-1/2 cursor-pointer overflow-hidden transition-all"
         onMouseEnter={() => setHoveredSide('right')}
         onMouseLeave={() => setHoveredSide(null)}
-        onClick={() => handleClick('right')}
+        onClick={() => handleClick('acting')}
       >
-        <canvas
-          ref={canvasRightRef}
-          className="absolute inset-0 w-full h-full"
-          style={{ pointerEvents: 'none' }}
-        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-bl from-blue-500/20 via-transparent to-transparent opacity-60" />
 
-        <div className="absolute inset-0 bg-gradient-to-bl from-blue-900/40 via-black/60 to-purple-900/40" />
+        {/* Content */}
+        <div className="relative z-10 flex h-full flex-col items-center justify-center p-12 text-center">
+          <h2 className="fade-in mb-4 text-7xl font-light tracking-wider text-white">
+            LÉA
+            <br />
+            <span className="text-8xl font-thin">BRASSEUR</span>
+          </h2>
+          <div className="fade-in mb-8 h-px w-24 bg-gradient-to-r from-transparent via-blue-400 to-transparent" />
+          <p className="fade-in text-2xl font-light tracking-[0.3em] text-blue-200">
+            COMÉDIENNE
+          </p>
 
-        <div className="relative z-10 h-full flex flex-col items-center justify-center p-12">
-          <div className="text-center transform transition-transform duration-700" style={{
-            transform: hoveredSide === 'right' ? 'scale(1.1)' : 'scale(1)',
-          }}>
-            <h2 className="text-8xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-              Comédie
-            </h2>
-            <p className="text-2xl text-white/70 mb-8 font-light">
-              Cinéma • Série • Théâtre
-            </p>
-            <div className={`inline-block px-8 py-4 rounded-full backdrop-blur-xl bg-white/10 border border-white/20 transition-all duration-500 ${
-              hoveredSide === 'right' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}>
-              <span className="text-white font-semibold">Découvrir →</span>
-            </div>
+          {/* Hover indicator */}
+          <div className={`fade-in mt-12 text-sm font-light tracking-widest text-white/60 transition-opacity ${
+            hoveredSide === 'right' ? 'opacity-100' : 'opacity-0'
+          }`}>
+            VOIR LE PORTFOLIO →
           </div>
+        </div>
+
+        {/* Subtle animated gradient */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute -right-1/2 -top-1/2 h-[200%] w-[200%] animate-spin-slow bg-gradient-radial from-blue-500/10 via-transparent to-transparent" />
         </div>
       </div>
 
-      {/* CENTER LOGO */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none">
-        <div className="text-center">
-          <h1 className="text-6xl font-bold text-white mb-2 tracking-tight">
-            LÉA BRASSEUR
-          </h1>
-          <div className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+      {/* Divider */}
+      <div
+        ref={dividerRef}
+        className="absolute left-1/2 top-0 z-20 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/30 to-transparent"
+      />
+
+      {/* Scroll indicator */}
+      <div className="fade-in absolute bottom-12 left-1/2 z-30 -translate-x-1/2">
+        <div className="flex flex-col items-center gap-2">
+          <div className="h-8 w-px animate-bounce bg-gradient-to-b from-white/40 to-transparent" />
+          <p className="text-xs font-light tracking-widest text-white/40">CHOISISSEZ</p>
         </div>
       </div>
     </div>

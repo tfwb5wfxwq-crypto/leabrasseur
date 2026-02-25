@@ -46,3 +46,21 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #a78bfa;
 }
+
+/* Premium animations */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
