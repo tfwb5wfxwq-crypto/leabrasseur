@@ -74,7 +74,7 @@ export default function Home() {
                 </div>
                 <div>
                   <img
-                    src="/photos/FlorianBoggia_Lea_37.jpg"
+                    src="photos/FlorianBoggia_Lea_37.jpg"
                     alt="Lea Brasseur"
                     className="w-full aspect-[3/4] object-cover"
                   />
@@ -103,14 +103,14 @@ export default function Home() {
 
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {[
-                  '/photos/FlorianBoggia_Lea_37.jpg',
-                  '/photos/FlorianBoggia_Lea_40.jpg',
-                  '/photos/IMG_4313 2.jpg',
-                  '/photos/FlorianBoggia_Lea_18.jpg',
-                  '/photos/IMG_4345.jpg',
-                  '/photos/IMG_4278.jpg',
-                  '/photos/IMG_5088.jpg',
-                  '/photos/IMG_4302.jpg',
+                  'photos/FlorianBoggia_Lea_37.jpg',
+                  'photos/FlorianBoggia_Lea_40.jpg',
+                  'photos/IMG_4313 2.jpg',
+                  'photos/FlorianBoggia_Lea_18.jpg',
+                  'photos/IMG_4345.jpg',
+                  'photos/IMG_4278.jpg',
+                  'photos/IMG_5088.jpg',
+                  'photos/IMG_4302.jpg',
                 ].map((src, i) => (
                   <div key={i} className="aspect-[3/4] overflow-hidden">
                     <img
