@@ -14,7 +14,7 @@ export default function Home() {
       <div className="min-h-screen bg-white">
         {/* Nav */}
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-          <div className="flex items-center justify-center gap-6 px-4 py-4">
+          <div className="flex items-center justify-center gap-8 px-6 py-6">
             <button
               onClick={() => setView('home')}
               className="text-sm font-light tracking-wide"
@@ -96,9 +96,9 @@ export default function Home() {
 
         {/* MODELING */}
         {view === 'modeling' && (
-          <main className="pt-40 pb-20">
-            <div className="max-w-7xl mx-auto px-12">
-              <div className="mb-20 text-center">
+          <main className="pt-56 pb-20">
+            <div className="max-w-6xl mx-auto px-16">
+              <div className="mb-24 text-center">
                 <h2
                   className="text-4xl md:text-5xl font-light mb-3"
                   style={{ fontFamily: "'Playfair Display', serif" }}
@@ -162,9 +162,9 @@ export default function Home() {
 
         {/* ACTING */}
         {view === 'acting' && (
-          <main className="pt-40 pb-20">
-            <div className="max-w-5xl mx-auto px-12">
-              <div className="mb-20 text-center">
+          <main className="pt-56 pb-20">
+            <div className="max-w-5xl mx-auto px-16">
+              <div className="mb-24 text-center">
                 <h2
                   className="text-4xl md:text-5xl font-light mb-3"
                   style={{ fontFamily: "'Playfair Display', serif" }}
