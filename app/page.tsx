@@ -1,43 +1,24 @@
 'use client';
 
 import { useState } from 'react';
-import Hero from '@/components/Hero';
-import ModelingSection from '@/components/ModelingSection';
-import ActingSection from '@/components/ActingSection';
-import About from '@/components/About';
-import Contact from '@/components/Contact';
-import ModeToggle, { type Mode } from '@/components/ModeToggle';
+import HeroSplit from '@/components/HeroSplit';
+import Navigation from '@/components/Navigation';
+import ModelingShowcase from '@/components/ModelingShowcase';
+import ActingShowcase from '@/components/ActingShowcase';
+
+export type ViewMode = 'split' | 'modeling' | 'acting';
 
 export default function Home() {
-  const [mode, setMode] = useState<Mode>('model');
+  const [viewMode, setViewMode] = useState<ViewMode>('split');
 
   return (
     <>
-      <ModeToggle mode={mode} onModeChange={setMode} />
-
-      <main
-        className="overflow-hidden transition-all duration-1000"
-        style={{
-          background: mode === 'model'
-            ? 'linear-gradient(180deg, #000000 0%, #1a0033 50%, #000000 100%)'
-            : 'linear-gradient(180deg, #000000 0%, #001a33 50%, #000000 100%)',
-        }}
-      >
-        <Hero mode={mode} />
-
-        {mode === 'model' ? (
-          <>
-            <ModelingSection />
-            <About />
-          </>
-        ) : (
-          <>
-            <ActingSection />
-            <About />
-          </>
-        )}
-
-        <Contact />
+      <Navigation viewMode={viewMode} setViewMode={setViewMode} />
+      
+      <main className="min-h-screen bg-black">
+        {viewMode === 'split' && <HeroSplit setViewMode={setViewMode} />}
+        {viewMode === 'modeling' && <ModelingShowcase onBack={() => setViewMode('split')} />}
+        {viewMode === 'acting' && <ActingShowcase onBack={() => setViewMode('split')} />}
       </main>
     </>
   );

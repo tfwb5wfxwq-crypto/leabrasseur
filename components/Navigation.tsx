@@ -1,71 +1,43 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { ViewMode } from '@/app/page';
 
-export default function Navigation() {
-  const [hidden, setHidden] = useState(false);
-  const [lastScroll, setLastScroll] = useState(0);
+interface NavigationProps {
+  viewMode: ViewMode;
+  setViewMode: (mode: ViewMode) => void;
+}
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScroll = window.scrollY;
-
-      if (currentScroll > lastScroll && currentScroll > 100) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-
-      setLastScroll(currentScroll);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScroll]);
+export default function Navigation({ viewMode, setViewMode }: NavigationProps) {
+  if (viewMode === 'split') return null;
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-500 backdrop-blur-sm ${
-        hidden ? '-translate-y-full' : 'translate-y-0'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="flex items-center justify-between">
-          <a href="#" className="text-2xl font-bold tracking-tight">
-            LÉA BRASSEUR
-          </a>
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30 border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+        <button
+          onClick={() => setViewMode('split')}
+          className="group flex items-center gap-3 px-6 py-3 rounded-full backdrop-blur-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="text-white/70 group-hover:text-white transition-colors"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          <span className="text-white/70 group-hover:text-white transition-colors font-medium">
+            Retour
+          </span>
+        </button>
 
-          <div className="flex gap-8">
-            <a
-              href="#modeling"
-              className="text-sm uppercase tracking-wider hover:text-purple-400 transition-colors relative group"
-            >
-              Mannequinat
-              <span className="absolute bottom-0 left-0 w-0 h-px bg-purple-400 transition-all duration-300 group-hover:w-full" />
-            </a>
-            <a
-              href="#acting"
-              className="text-sm uppercase tracking-wider hover:text-purple-400 transition-colors relative group"
-            >
-              Comédie
-              <span className="absolute bottom-0 left-0 w-0 h-px bg-purple-400 transition-all duration-300 group-hover:w-full" />
-            </a>
-            <a
-              href="#about"
-              className="text-sm uppercase tracking-wider hover:text-purple-400 transition-colors relative group"
-            >
-              À propos
-              <span className="absolute bottom-0 left-0 w-0 h-px bg-purple-400 transition-all duration-300 group-hover:w-full" />
-            </a>
-            <a
-              href="#contact"
-              className="text-sm uppercase tracking-wider hover:text-purple-400 transition-colors relative group"
-            >
-              Contact
-              <span className="absolute bottom-0 left-0 w-0 h-px bg-purple-400 transition-all duration-300 group-hover:w-full" />
-            </a>
-          </div>
-        </div>
+        <h1 className="text-2xl font-bold text-white tracking-tight">
+          LÉA BRASSEUR
+        </h1>
+
+        <div className="w-32" /> {/* Spacer for centering */}
       </div>
     </nav>
   );
