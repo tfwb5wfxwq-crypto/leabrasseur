@@ -14,24 +14,24 @@ export default function Home() {
       <div className="min-h-screen bg-white">
         {/* Nav */}
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
-          <div className="flex items-center justify-between px-6 md:px-12 py-5 max-w-7xl mx-auto">
+          <div className="flex items-center justify-between px-4 py-4 max-w-6xl mx-auto">
             <button
               onClick={() => setView('home')}
-              className="text-xl md:text-2xl font-light tracking-[0.15em]"
+              className="text-base md:text-xl font-light tracking-wide"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              LEA BRASSEUR
+              Lea Brasseur
             </button>
-            <div className="flex gap-8 text-xs tracking-[0.15em] uppercase font-light">
+            <div className="flex gap-4 md:gap-6 text-xs tracking-wide uppercase font-light">
               <button
                 onClick={() => setView('modeling')}
-                className={view === 'modeling' ? 'text-black' : 'text-gray-400 hover:text-black'}
+                className={view === 'modeling' ? 'text-black' : 'text-gray-400 hover:text-black transition-colors'}
               >
                 Mannequin
               </button>
               <button
                 onClick={() => setView('acting')}
-                className={view === 'acting' ? 'text-black' : 'text-gray-400 hover:text-black'}
+                className={view === 'acting' ? 'text-black' : 'text-gray-400 hover:text-black transition-colors'}
               >
                 Comédie
               </button>
