@@ -3,8 +3,13 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import ParticlesBackground from './ParticlesBackground';
+import { Mode } from './ModeToggle';
 
-export default function Hero() {
+interface HeroProps {
+  mode: Mode;
+}
+
+export default function Hero({ mode }: HeroProps) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
 
@@ -42,9 +47,20 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
+  // Re-animate on mode change
+  useEffect(() => {
+    if (subtitleRef.current) {
+      gsap.fromTo(
+        subtitleRef.current,
+        { opacity: 0, scale: 0.8, y: 20 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+      );
+    }
+  }, [mode]);
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      <ParticlesBackground />
+      <ParticlesBackground color={mode === 'model' ? '#ec4899' : '#3b82f6'} />
 
       <div className="relative z-10 text-center">
         <h1
@@ -55,9 +71,13 @@ export default function Hero() {
         </h1>
         <p
           ref={subtitleRef}
-          className="text-xl md:text-2xl text-gray-400 uppercase tracking-widest"
+          className={`text-xl md:text-3xl font-bold uppercase tracking-widest transition-all duration-500 ${
+            mode === 'model'
+              ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400'
+              : 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400'
+          }`}
         >
-          Mannequin • Comédienne
+          {mode === 'model' ? 'Mannequin' : 'Comédienne'}
         </p>
       </div>
 

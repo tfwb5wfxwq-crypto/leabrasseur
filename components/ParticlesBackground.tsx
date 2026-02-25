@@ -3,8 +3,13 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-export default function ParticlesBackground() {
+interface ParticlesBackgroundProps {
+  color?: string;
+}
+
+export default function ParticlesBackground({ color = '#8b5cf6' }: ParticlesBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const materialRef = useRef<THREE.PointsMaterial | null>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -42,11 +47,13 @@ export default function ParticlesBackground() {
 
     const particlesMaterial = new THREE.PointsMaterial({
       size: 0.02,
-      color: '#8b5cf6',
+      color: color,
       transparent: true,
       opacity: 0.8,
       blending: THREE.AdditiveBlending,
     });
+
+    materialRef.current = particlesMaterial;
 
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particlesMesh);
@@ -93,6 +100,13 @@ export default function ParticlesBackground() {
       renderer.dispose();
     };
   }, []);
+
+  // Update color when prop changes
+  useEffect(() => {
+    if (materialRef.current) {
+      materialRef.current.color.set(color);
+    }
+  }, [color]);
 
   return (
     <canvas
