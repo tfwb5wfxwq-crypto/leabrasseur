@@ -96,11 +96,11 @@ export default function Home() {
 
         {/* MODELING */}
         {view === 'modeling' && (
-          <main className="pt-28 pb-16">
-            <div className="max-w-6xl mx-auto px-8">
-              <div className="mb-16 text-center">
+          <main className="pt-40 pb-20">
+            <div className="max-w-7xl mx-auto px-12">
+              <div className="mb-20 text-center">
                 <h2
-                  className="text-5xl md:text-6xl font-light mb-2"
+                  className="text-4xl md:text-5xl font-light mb-3"
                   style={{ fontFamily: "'Playfair Display', serif" }}
                 >
                   Mannequin
@@ -110,7 +110,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {[
                   'photos/FlorianBoggia_Lea_37.jpg',
                   'photos/FlorianBoggia_Lea_40.jpg',
@@ -162,11 +162,11 @@ export default function Home() {
 
         {/* ACTING */}
         {view === 'acting' && (
-          <main className="pt-28 pb-16">
-            <div className="max-w-4xl mx-auto px-8">
-              <div className="mb-16 text-center">
+          <main className="pt-40 pb-20">
+            <div className="max-w-5xl mx-auto px-12">
+              <div className="mb-20 text-center">
                 <h2
-                  className="text-5xl md:text-6xl font-light mb-2"
+                  className="text-4xl md:text-5xl font-light mb-3"
                   style={{ fontFamily: "'Playfair Display', serif" }}
                 >
                   Comédie
