@@ -176,6 +176,29 @@ export default function Home() {
                 </p>
               </div>
 
+              {/* Video Player */}
+              <div className="mb-20 max-w-4xl mx-auto">
+                <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
+                  <video
+                    controls
+                    preload="metadata"
+                    className="w-full aspect-video"
+                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Crect fill='%23000' width='1280' height='720'/%3E%3C/svg%3E"
+                  >
+                    <source src="/videos/monologue.mp4" type="video/mp4" />
+                    Votre navigateur ne supporte pas la vidéo.
+                  </video>
+                </div>
+                <div className="mt-6 text-center">
+                  <p className="text-xl font-light text-gray-800 mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    Tape Monologue
+                  </p>
+                  <p className="text-sm text-gray-400 tracking-wide">
+                    Extrait de travail personnel
+                  </p>
+                </div>
+              </div>
+
               <div className="space-y-12">
                 {[
                   { title: 'On Me', type: 'Clip musical', year: '2025', role: 'Rôle principal', details: 'Valentino & Harrison (DJ)' },
