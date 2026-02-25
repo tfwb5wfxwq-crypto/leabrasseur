@@ -13,6 +13,7 @@ export default function HeroSplit({ setViewMode }: HeroSplitProps) {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
+  const nameRef = useRef<HTMLDivElement>(null);
   const [hoveredSide, setHoveredSide] = useState<'left' | 'right' | null>(null);
 
   // Hover animations
@@ -20,17 +21,14 @@ export default function HeroSplit({ setViewMode }: HeroSplitProps) {
     if (!leftRef.current || !rightRef.current || !dividerRef.current) return;
 
     if (hoveredSide === 'left') {
-      gsap.to(leftRef.current, { width: '60%', duration: 0.8, ease: 'power3.out' });
-      gsap.to(rightRef.current, { width: '40%', duration: 0.8, ease: 'power3.out' });
-      gsap.to(dividerRef.current, { x: '10%', duration: 0.8, ease: 'power3.out' });
+      gsap.to(leftRef.current, { width: '55%', duration: 0.8, ease: 'power3.out' });
+      gsap.to(rightRef.current, { width: '45%', duration: 0.8, ease: 'power3.out' });
     } else if (hoveredSide === 'right') {
-      gsap.to(leftRef.current, { width: '40%', duration: 0.8, ease: 'power3.out' });
-      gsap.to(rightRef.current, { width: '60%', duration: 0.8, ease: 'power3.out' });
-      gsap.to(dividerRef.current, { x: '-10%', duration: 0.8, ease: 'power3.out' });
+      gsap.to(leftRef.current, { width: '45%', duration: 0.8, ease: 'power3.out' });
+      gsap.to(rightRef.current, { width: '55%', duration: 0.8, ease: 'power3.out' });
     } else {
       gsap.to(leftRef.current, { width: '50%', duration: 0.8, ease: 'power3.out' });
       gsap.to(rightRef.current, { width: '50%', duration: 0.8, ease: 'power3.out' });
-      gsap.to(dividerRef.current, { x: '0%', duration: 0.8, ease: 'power3.out' });
     }
   }, [hoveredSide]);
 
@@ -38,113 +36,117 @@ export default function HeroSplit({ setViewMode }: HeroSplitProps) {
   useEffect(() => {
     gsap.from('.fade-in', {
       opacity: 0,
-      y: 30,
-      duration: 1.2,
+      y: 40,
+      duration: 1.5,
       ease: 'power3.out',
-      stagger: 0.2,
-      delay: 0.3,
+      stagger: 0.15,
+      delay: 0.2,
     });
   }, []);
 
   const handleClick = (mode: ViewMode) => {
     if (!containerRef.current) return;
 
-    // Fade out animation before transition
+    // Fade out animation
     gsap.to(containerRef.current, {
       opacity: 0,
-      duration: 0.5,
+      duration: 0.6,
       ease: 'power2.inOut',
       onComplete: () => setViewMode(mode),
     });
   };
 
   return (
-    <div ref={containerRef} className="relative h-screen overflow-hidden bg-black">
+    <div ref={containerRef} className="relative h-screen overflow-hidden bg-white">
       {/* Left side - Mannequin */}
       <div
         ref={leftRef}
-        className="absolute left-0 top-0 h-full w-1/2 cursor-pointer overflow-hidden transition-all"
+        className="absolute left-0 top-0 h-full w-1/2 cursor-pointer transition-all"
         onMouseEnter={() => setHoveredSide('left')}
         onMouseLeave={() => setHoveredSide(null)}
         onClick={() => handleClick('modeling')}
       >
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 via-transparent to-transparent opacity-60" />
+        {/* Subtle gradient on hover */}
+        <div className={`absolute inset-0 bg-gradient-to-r from-gray-50/50 to-transparent transition-opacity duration-700 ${
+          hoveredSide === 'left' ? 'opacity-100' : 'opacity-0'
+        }`} />
 
-        {/* Content */}
-        <div className="relative z-10 flex h-full flex-col items-center justify-center p-12 text-center">
-          <h2 className="fade-in mb-4 text-7xl font-light tracking-wider text-white">
-            LÉA
-            <br />
-            <span className="text-8xl font-thin">BRASSEUR</span>
-          </h2>
-          <div className="fade-in mb-8 h-px w-24 bg-gradient-to-r from-transparent via-pink-400 to-transparent" />
-          <p className="fade-in text-2xl font-light tracking-[0.3em] text-pink-200">
-            MANNEQUIN
-          </p>
-
-          {/* Hover indicator */}
-          <div className={`fade-in mt-12 text-sm font-light tracking-widest text-white/60 transition-opacity ${
-            hoveredSide === 'left' ? 'opacity-100' : 'opacity-0'
-          }`}>
-            VOIR LE PORTFOLIO →
+        {/* Mannequin label */}
+        <div className="absolute left-12 top-1/2 -translate-y-1/2">
+          <div className="fade-in flex items-center gap-8">
+            <div className={`h-px bg-black transition-all duration-700 ${
+              hoveredSide === 'left' ? 'w-16' : 'w-8'
+            }`} />
+            <h3 className={`font-serif text-sm tracking-[0.5em] transition-all duration-700 ${
+              hoveredSide === 'left' ? 'text-black' : 'text-gray-400'
+            }`}>
+              MANNEQUIN
+            </h3>
           </div>
-        </div>
-
-        {/* Subtle animated gradient */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute -left-1/2 -top-1/2 h-[200%] w-[200%] animate-spin-slow bg-gradient-radial from-pink-500/10 via-transparent to-transparent" />
         </div>
       </div>
 
-      {/* Right side - Actrice */}
+      {/* Right side - Comédienne */}
       <div
         ref={rightRef}
-        className="absolute right-0 top-0 h-full w-1/2 cursor-pointer overflow-hidden transition-all"
+        className="absolute right-0 top-0 h-full w-1/2 cursor-pointer transition-all"
         onMouseEnter={() => setHoveredSide('right')}
         onMouseLeave={() => setHoveredSide(null)}
         onClick={() => handleClick('acting')}
       >
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-bl from-blue-500/20 via-transparent to-transparent opacity-60" />
+        {/* Subtle gradient on hover */}
+        <div className={`absolute inset-0 bg-gradient-to-l from-gray-50/50 to-transparent transition-opacity duration-700 ${
+          hoveredSide === 'right' ? 'opacity-100' : 'opacity-0'
+        }`} />
 
-        {/* Content */}
-        <div className="relative z-10 flex h-full flex-col items-center justify-center p-12 text-center">
-          <h2 className="fade-in mb-4 text-7xl font-light tracking-wider text-white">
-            LÉA
-            <br />
-            <span className="text-8xl font-thin">BRASSEUR</span>
-          </h2>
-          <div className="fade-in mb-8 h-px w-24 bg-gradient-to-r from-transparent via-blue-400 to-transparent" />
-          <p className="fade-in text-2xl font-light tracking-[0.3em] text-blue-200">
-            COMÉDIENNE
-          </p>
-
-          {/* Hover indicator */}
-          <div className={`fade-in mt-12 text-sm font-light tracking-widest text-white/60 transition-opacity ${
-            hoveredSide === 'right' ? 'opacity-100' : 'opacity-0'
-          }`}>
-            VOIR LE PORTFOLIO →
+        {/* Comédienne label */}
+        <div className="absolute right-12 top-1/2 -translate-y-1/2">
+          <div className="fade-in flex items-center gap-8">
+            <h3 className={`font-serif text-sm tracking-[0.5em] transition-all duration-700 ${
+              hoveredSide === 'right' ? 'text-black' : 'text-gray-400'
+            }`}>
+              COMEDIENNE
+            </h3>
+            <div className={`h-px bg-black transition-all duration-700 ${
+              hoveredSide === 'right' ? 'w-16' : 'w-8'
+            }`} />
           </div>
-        </div>
-
-        {/* Subtle animated gradient */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute -right-1/2 -top-1/2 h-[200%] w-[200%] animate-spin-slow bg-gradient-radial from-blue-500/10 via-transparent to-transparent" />
         </div>
       </div>
 
-      {/* Divider */}
+      {/* Center name */}
+      <div
+        ref={nameRef}
+        className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-center"
+      >
+        <div className="fade-in mb-8 flex items-center justify-center gap-4">
+          <div className="h-px w-12 bg-black/20" />
+          <span className="font-serif text-xs tracking-[0.3em] text-gray-400">PORTFOLIO</span>
+          <div className="h-px w-12 bg-black/20" />
+        </div>
+
+        <h1 className="fade-in font-serif text-[120px] font-light leading-none tracking-tight text-black">
+          LEA
+          <br />
+          <span className="text-[140px] font-extralight tracking-wider">BRASSEUR</span>
+        </h1>
+
+        <div className="fade-in mt-8 text-xs font-light tracking-[0.4em] text-gray-500">
+          PARIS
+        </div>
+      </div>
+
+      {/* Vertical divider */}
       <div
         ref={dividerRef}
-        className="absolute left-1/2 top-0 z-20 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/30 to-transparent"
+        className="absolute left-1/2 top-0 z-0 h-full w-px -translate-x-1/2 bg-black/10"
       />
 
       {/* Scroll indicator */}
       <div className="fade-in absolute bottom-12 left-1/2 z-30 -translate-x-1/2">
-        <div className="flex flex-col items-center gap-2">
-          <div className="h-8 w-px animate-bounce bg-gradient-to-b from-white/40 to-transparent" />
-          <p className="text-xs font-light tracking-widest text-white/40">CHOISISSEZ</p>
+        <div className="flex flex-col items-center gap-3">
+          <p className="font-serif text-[10px] tracking-[0.3em] text-gray-400">CHOISISSEZ VOTRE UNIVERS</p>
+          <div className="h-12 w-px animate-pulse bg-gradient-to-b from-black/40 to-transparent" />
         </div>
       </div>
     </div>

@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Léa Brasseur - Mannequin & Comédienne",
-  description: "Portfolio de Léa Brasseur - Mannequin et Comédienne professionnelle",
+  title: "Lea Brasseur - Mannequin & Comédienne",
+  description: "Portfolio de Lea Brasseur - Mannequin et Comédienne professionnelle",
 };
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black`}
       >
         <SmoothScroll>
           {children}
