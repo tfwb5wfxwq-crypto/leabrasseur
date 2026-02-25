@@ -44,7 +44,7 @@ export default function Home() {
           <main className="pt-24 pb-16">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
               <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center min-h-[calc(100vh-12rem)]">
-                <div>
+                <div className="text-center md:text-left">
                   <h1
                     className="text-6xl md:text-8xl font-light leading-[0.9] mb-8"
                     style={{ fontFamily: "'Playfair Display', serif" }}
@@ -57,7 +57,7 @@ export default function Home() {
                   <p className="text-sm text-gray-400 mb-12 tracking-widest uppercase">
                     Paris
                   </p>
-                  <div className="flex gap-4">
+                  <div className="flex gap-4 justify-center md:justify-start">
                     <button
                       onClick={() => setView('modeling')}
                       className="px-8 py-3 bg-black text-white text-sm tracking-wider uppercase font-light hover:bg-gray-800"
@@ -72,7 +72,7 @@ export default function Home() {
                     </button>
                   </div>
                 </div>
-                <div>
+                <div className="text-center">
                   <img
                     src="photos/FlorianBoggia_Lea_37.jpg"
                     alt="Lea Brasseur"
@@ -89,7 +89,7 @@ export default function Home() {
         {view === 'modeling' && (
           <main className="pt-28 pb-16">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
-              <div className="mb-16">
+              <div className="mb-16 text-center">
                 <h2
                   className="text-5xl md:text-6xl font-light mb-2"
                   style={{ fontFamily: "'Playfair Display', serif" }}
@@ -135,7 +135,7 @@ export default function Home() {
         {view === 'acting' && (
           <main className="pt-28 pb-16">
             <div className="max-w-5xl mx-auto px-6 md:px-12">
-              <div className="mb-16">
+              <div className="mb-16 text-center">
                 <h2
                   className="text-5xl md:text-6xl font-light mb-2"
                   style={{ fontFamily: "'Playfair Display', serif" }}
