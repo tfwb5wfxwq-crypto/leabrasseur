@@ -42,44 +42,42 @@ export default function Home() {
         {/* HOME */}
         {view === 'home' && (
           <main className="pt-24 pb-16">
-            <div className="max-w-7xl mx-auto px-6 md:px-12">
-              <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center min-h-[calc(100vh-12rem)]">
-                <div className="text-center md:text-left">
-                  <h1
-                    className="text-6xl md:text-8xl font-light leading-[0.9] mb-8"
-                    style={{ fontFamily: "'Playfair Display', serif" }}
-                  >
-                    Lea<br />Brasseur
-                  </h1>
-                  <p className="text-lg text-gray-600 mb-2 font-light tracking-wide">
-                    Mannequin & Comédienne
-                  </p>
-                  <p className="text-sm text-gray-400 mb-12 tracking-widest uppercase">
-                    Paris
-                  </p>
-                  <div className="flex gap-4 justify-center md:justify-start">
-                    <button
-                      onClick={() => setView('modeling')}
-                      className="px-8 py-3 bg-black text-white text-sm tracking-wider uppercase font-light hover:bg-gray-800"
-                    >
-                      Mannequin
-                    </button>
-                    <button
-                      onClick={() => setView('acting')}
-                      className="px-8 py-3 border border-black text-black text-sm tracking-wider uppercase font-light hover:bg-black hover:text-white"
-                    >
-                      Comédie
-                    </button>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <img
-                    src="photos/FlorianBoggia_Lea_37.jpg"
-                    alt="Lea Brasseur"
-                    className="w-full aspect-[3/4] object-cover"
-                  />
-                  <p className="text-xs text-gray-400 mt-2 tracking-wide">© Florian Boggia</p>
-                </div>
+            <div className="max-w-4xl mx-auto px-8 text-center">
+              <h1
+                className="text-6xl md:text-8xl font-light leading-[0.9] mb-6"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                Lea Brasseur
+              </h1>
+              <p className="text-xl text-gray-600 mb-2 font-light tracking-wide">
+                Mannequin & Comédienne
+              </p>
+              <p className="text-sm text-gray-400 mb-12 tracking-widest uppercase">
+                Paris
+              </p>
+
+              <div className="max-w-md mx-auto mb-12">
+                <img
+                  src="photos/FlorianBoggia_Lea_37.jpg"
+                  alt="Lea Brasseur"
+                  className="w-full aspect-[3/4] object-cover"
+                />
+                <p className="text-xs text-gray-400 mt-2 tracking-wide">© Florian Boggia</p>
+              </div>
+
+              <div className="flex gap-4 justify-center">
+                <button
+                  onClick={() => setView('modeling')}
+                  className="px-8 py-3 bg-black text-white text-sm tracking-wider uppercase font-light hover:bg-gray-800 transition-colors"
+                >
+                  Portfolio Mannequin
+                </button>
+                <button
+                  onClick={() => setView('acting')}
+                  className="px-8 py-3 border border-black text-black text-sm tracking-wider uppercase font-light hover:bg-black hover:text-white transition-colors"
+                >
+                  Portfolio Comédie
+                </button>
               </div>
             </div>
           </main>
@@ -88,7 +86,7 @@ export default function Home() {
         {/* MODELING */}
         {view === 'modeling' && (
           <main className="pt-28 pb-16">
-            <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <div className="max-w-6xl mx-auto px-8">
               <div className="mb-16 text-center">
                 <h2
                   className="text-5xl md:text-6xl font-light mb-2"
@@ -154,7 +152,7 @@ export default function Home() {
         {/* ACTING */}
         {view === 'acting' && (
           <main className="pt-28 pb-16">
-            <div className="max-w-5xl mx-auto px-6 md:px-12">
+            <div className="max-w-4xl mx-auto px-8">
               <div className="mb-16 text-center">
                 <h2
                   className="text-5xl md:text-6xl font-light mb-2"
