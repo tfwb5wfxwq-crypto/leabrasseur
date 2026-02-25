@@ -14,15 +14,15 @@ export default function Home() {
       <div className="min-h-screen bg-white">
         {/* Nav */}
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-          <div className="flex items-center justify-center gap-8 px-6 py-6">
+          <div className="flex items-center justify-center gap-12 px-8 py-8">
             <button
               onClick={() => setView('home')}
-              className="text-sm font-light tracking-wide"
+              className="text-lg font-light tracking-wide"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Lea Brasseur
             </button>
-            <div className="flex gap-6 text-xs tracking-widest uppercase font-light">
+            <div className="flex gap-10 text-sm tracking-widest uppercase font-light">
               <button
                 onClick={() => setView('modeling')}
                 className={view === 'modeling' ? 'text-black' : 'text-gray-400 hover:text-black transition-colors'}
@@ -96,8 +96,8 @@ export default function Home() {
 
         {/* MODELING */}
         {view === 'modeling' && (
-          <main className="pt-56 pb-20">
-            <div className="max-w-6xl mx-auto px-16">
+          <main className="pt-64 pb-20">
+            <div className="max-w-6xl mx-auto px-20">
               <div className="mb-24 text-center">
                 <h2
                   className="text-4xl md:text-5xl font-light mb-3"
@@ -162,8 +162,8 @@ export default function Home() {
 
         {/* ACTING */}
         {view === 'acting' && (
-          <main className="pt-56 pb-20">
-            <div className="max-w-5xl mx-auto px-16">
+          <main className="pt-64 pb-20">
+            <div className="max-w-5xl mx-auto px-20">
               <div className="mb-24 text-center">
                 <h2
                   className="text-4xl md:text-5xl font-light mb-3"
