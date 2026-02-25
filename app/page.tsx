@@ -41,43 +41,54 @@ export default function Home() {
 
         {/* HOME */}
         {view === 'home' && (
-          <main className="pt-24 pb-16">
-            <div className="max-w-4xl mx-auto px-8 text-center">
-              <h1
-                className="text-6xl md:text-8xl font-light leading-[0.9] mb-6"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                Lea Brasseur
-              </h1>
-              <p className="text-xl text-gray-600 mb-2 font-light tracking-wide">
-                Mannequin & Comédienne
-              </p>
-              <p className="text-sm text-gray-400 mb-12 tracking-widest uppercase">
-                Paris
-              </p>
+          <main className="min-h-screen flex items-center justify-center px-4 py-20">
+            <div className="w-full max-w-5xl">
+              <div className="grid md:grid-cols-[1fr,400px] gap-16 items-center">
+                {/* Left: Text */}
+                <div className="space-y-8">
+                  <div>
+                    <h1
+                      className="text-7xl md:text-9xl font-light leading-[0.85] mb-6"
+                      style={{ fontFamily: "'Playfair Display', serif" }}
+                    >
+                      Lea<br />Brasseur
+                    </h1>
+                    <div className="h-px w-24 bg-black mb-6"></div>
+                    <p className="text-2xl text-gray-700 font-light mb-3">
+                      Mannequin & Comédienne
+                    </p>
+                    <p className="text-sm text-gray-400 tracking-[0.3em] uppercase">
+                      Paris
+                    </p>
+                  </div>
 
-              <div className="max-w-md mx-auto mb-12">
-                <img
-                  src="photos/FlorianBoggia_Lea_37.jpg"
-                  alt="Lea Brasseur"
-                  className="w-full aspect-[3/4] object-cover"
-                />
-                <p className="text-xs text-gray-400 mt-2 tracking-wide">© Florian Boggia</p>
-              </div>
+                  <div className="flex gap-6 pt-4">
+                    <button
+                      onClick={() => setView('modeling')}
+                      className="px-10 py-4 bg-black text-white text-xs tracking-[0.2em] uppercase font-light hover:bg-gray-800 transition-all"
+                    >
+                      Mannequin
+                    </button>
+                    <button
+                      onClick={() => setView('acting')}
+                      className="px-10 py-4 border border-black text-black text-xs tracking-[0.2em] uppercase font-light hover:bg-black hover:text-white transition-all"
+                    >
+                      Comédie
+                    </button>
+                  </div>
+                </div>
 
-              <div className="flex gap-4 justify-center">
-                <button
-                  onClick={() => setView('modeling')}
-                  className="px-8 py-3 bg-black text-white text-sm tracking-wider uppercase font-light hover:bg-gray-800 transition-colors"
-                >
-                  Portfolio Mannequin
-                </button>
-                <button
-                  onClick={() => setView('acting')}
-                  className="px-8 py-3 border border-black text-black text-sm tracking-wider uppercase font-light hover:bg-black hover:text-white transition-colors"
-                >
-                  Portfolio Comédie
-                </button>
+                {/* Right: Photo */}
+                <div className="relative">
+                  <img
+                    src="photos/FlorianBoggia_Lea_37.jpg"
+                    alt="Lea Brasseur"
+                    className="w-full aspect-[3/4] object-cover shadow-2xl"
+                  />
+                  <p className="text-xs text-gray-400 mt-4 text-center tracking-wide">
+                    © Florian Boggia
+                  </p>
+                </div>
               </div>
             </div>
           </main>
