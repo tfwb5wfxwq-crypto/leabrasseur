@@ -14,15 +14,15 @@ export default function Home() {
       <div className="min-h-screen bg-white">
         {/* Nav */}
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-          <div className="flex items-center justify-center gap-8 px-6 py-5">
+          <div className="flex items-center justify-center gap-6 px-4 py-4">
             <button
               onClick={() => setView('home')}
-              className="text-lg font-light tracking-wide"
+              className="text-sm font-light tracking-wide"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Lea Brasseur
             </button>
-            <div className="flex gap-8 text-xs tracking-widest uppercase font-light">
+            <div className="flex gap-6 text-xs tracking-widest uppercase font-light">
               <button
                 onClick={() => setView('modeling')}
                 className={view === 'modeling' ? 'text-black' : 'text-gray-400 hover:text-black transition-colors'}
@@ -41,14 +41,14 @@ export default function Home() {
 
         {/* HOME */}
         {view === 'home' && (
-          <main className="min-h-screen flex items-center justify-center px-4 pt-48 pb-20">
+          <main className="min-h-screen flex items-center justify-center px-4 pt-28 pb-16">
             <div className="w-full max-w-4xl">
-              <div className="grid md:grid-cols-[1.5fr,260px] gap-12 items-center">
+              <div className="grid md:grid-cols-[1.8fr,200px] gap-10 items-center">
                 {/* Left: Text */}
-                <div className="space-y-8">
+                <div className="space-y-6">
                   <div>
                     <h1
-                      className="text-7xl md:text-9xl font-light leading-[0.85] mb-6"
+                      className="text-5xl md:text-7xl font-light leading-[0.85] mb-5"
                       style={{ fontFamily: "'Playfair Display', serif" }}
                     >
                       Lea<br />Brasseur
