@@ -1,36 +1,170 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Léa Brasseur - Portfolio
 
-## Getting Started
+Portfolio moderne pour Léa Brasseur, mannequin et comédienne, avec animations avancées inspirées de Skaald.
 
-First, run the development server:
+![Preview](https://img.shields.io/badge/Status-Live-success)
+![Next.js](https://img.shields.io/badge/Next.js-16-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+
+## ✨ Features
+
+### Animations & Effects
+- **Three.js Particles** - Fond de particules 3D interactif qui suit la souris
+- **GSAP + ScrollTrigger** - Animations de scroll fluides et dynamiques
+- **Lenis Smooth Scroll** - Défilement ultra-fluide avec easing personnalisé
+- **Text Splitting** - Animation lettre par lettre sur le titre hero
+- **Parallax Images** - Effet de profondeur sur les photos de shoots
+- **Auto-hide Navigation** - Navigation qui disparaît au scroll
+
+### Sections
+1. **Hero** - Titre animé avec particules Three.js
+2. **Mannequinat** - Galerie de shoots avec parallax et hover effects
+3. **Comédie** - Cartes vidéo avec play button animé
+4. **À propos** - Biographie et statistiques
+5. **Contact** - Coordonnées et réseaux sociaux
+
+### Tech Stack
+- **Framework** : Next.js 16 (App Router)
+- **Language** : TypeScript
+- **Styling** : Tailwind CSS
+- **Animations** : GSAP + ScrollTrigger
+- **3D Graphics** : Three.js
+- **Smooth Scroll** : Lenis
+- **Fonts** : Geist Sans & Mono
+
+## 🚀 Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/tfwb5wfxwq-crypto/leabrasseur.git
+cd leabrasseur
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Build & Deploy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Build for production
+npm run build
 
-## Learn More
+# Start production server
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Deploy to Vercel
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/tfwb5wfxwq-crypto/leabrasseur)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Deploy to Netlify
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/tfwb5wfxwq-crypto/leabrasseur)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Structure
 
-## Deploy on Vercel
+```
+leabrasseur/
+├── app/
+│   ├── layout.tsx          # Root layout with providers
+│   ├── page.tsx            # Home page
+│   └── globals.css         # Global styles
+├── components/
+│   ├── SmoothScroll.tsx    # Lenis smooth scroll wrapper
+│   ├── Navigation.tsx      # Auto-hide nav with underline effects
+│   ├── ParticlesBackground.tsx  # Three.js particles
+│   ├── Hero.tsx            # Hero section with text animation
+│   ├── ModelingSection.tsx # Photo gallery with parallax
+│   ├── ActingSection.tsx   # Video cards section
+│   ├── About.tsx           # Biography and stats
+│   └── Contact.tsx         # Contact information
+└── public/                 # Static assets
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Customization
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Colors
+Modifier les couleurs dans `tailwind.config.ts` :
+```typescript
+colors: {
+  purple: {
+    400: '#a78bfa',  // Accent color
+    950: '#1e1b4b',  // Dark purple
+  }
+}
+```
+
+### Animations
+Ajuster la vitesse dans `components/SmoothScroll.tsx` :
+```typescript
+const lenis = new Lenis({
+  duration: 1.2,  // Durée de l'easing (1.2s par défaut)
+  // ...
+});
+```
+
+### Particles
+Modifier le nombre de particules dans `components/ParticlesBackground.tsx` :
+```typescript
+const particlesCount = 1000;  // 1000 par défaut
+```
+
+## 📝 Content Management
+
+### Ajouter des photos de shoots
+Modifier l'array `shoots` dans `components/ModelingSection.tsx` :
+```typescript
+const shoots = [
+  { 
+    id: 1, 
+    title: 'Nouveau Shoot', 
+    year: '2026', 
+    image: 'https://...' 
+  },
+  // ...
+];
+```
+
+### Ajouter des vidéos
+Modifier l'array `videos` dans `components/ActingSection.tsx` :
+```typescript
+const videos = [
+  { 
+    id: 1, 
+    title: 'Nouvelle Production', 
+    type: 'Rôle principal', 
+    thumbnail: 'https://...' 
+  },
+  // ...
+];
+```
+
+## 🐛 Troubleshooting
+
+### Port déjà utilisé
+Si le port 3000 est occupé :
+```bash
+npm run dev -- -p 3001
+```
+
+### Erreurs Three.js
+Si vous voyez des erreurs WebGL :
+- Vérifiez que votre navigateur supporte WebGL
+- Essayez de désactiver les extensions qui bloquent WebGL
+
+## 📄 License
+
+© 2026 Léa Brasseur. Tous droits réservés.
+
+## 🙏 Credits
+
+- Animations inspirées de [Skaald](https://www.skaald.com/)
+- Développé avec ❤️ par Claude Code
+
+---
+
+**Status** : 🚀 Live & Ready  
+**Demo** : [https://leabrasseur.vercel.app](https://github.com/tfwb5wfxwq-crypto/leabrasseur)
