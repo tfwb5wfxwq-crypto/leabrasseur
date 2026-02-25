@@ -13,16 +13,16 @@ export default function Home() {
 
       <div className="min-h-screen bg-white">
         {/* Nav */}
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
-          <div className="flex items-center justify-between px-4 py-4 max-w-6xl mx-auto">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+          <div className="flex items-center justify-center gap-8 px-6 py-5">
             <button
               onClick={() => setView('home')}
-              className="text-base md:text-xl font-light tracking-wide"
+              className="text-lg font-light tracking-wide"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Lea Brasseur
             </button>
-            <div className="flex gap-4 md:gap-6 text-xs tracking-wide uppercase font-light">
+            <div className="flex gap-8 text-xs tracking-widest uppercase font-light">
               <button
                 onClick={() => setView('modeling')}
                 className={view === 'modeling' ? 'text-black' : 'text-gray-400 hover:text-black transition-colors'}
@@ -41,9 +41,9 @@ export default function Home() {
 
         {/* HOME */}
         {view === 'home' && (
-          <main className="min-h-screen flex items-center justify-center px-4 py-20">
+          <main className="min-h-screen flex items-center justify-center px-4 pt-32 pb-20">
             <div className="w-full max-w-5xl">
-              <div className="grid md:grid-cols-[1fr,400px] gap-16 items-center">
+              <div className="grid md:grid-cols-[1.2fr,320px] gap-12 items-center">
                 {/* Left: Text */}
                 <div className="space-y-8">
                   <div>
@@ -81,12 +81,12 @@ export default function Home() {
                 {/* Right: Photo */}
                 <div className="relative">
                   <img
-                    src="photos/FlorianBoggia_Lea_37.jpg"
+                    src="photos/IMG_4302.jpg"
                     alt="Lea Brasseur"
                     className="w-full aspect-[3/4] object-cover shadow-2xl"
                   />
                   <p className="text-xs text-gray-400 mt-4 text-center tracking-wide">
-                    © Florian Boggia
+                    © Studio
                   </p>
                 </div>
               </div>
