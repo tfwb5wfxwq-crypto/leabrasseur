@@ -12,8 +12,8 @@ export default function Home() {
     setAnimating(true);
     setTimeout(() => {
       setView(newView);
-      setTimeout(() => setAnimating(false), 100);
-    }, 800);
+      setTimeout(() => setAnimating(false), 150);
+    }, 1000);
   };
 
   const switchMode = () => {
@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <>
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Italiana&family=Lexend:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Italiana&family=Lexend:wght@300;400;500&display=swap');
 
         @keyframes slideRight {
           from {
@@ -35,7 +35,7 @@ export default function Home() {
             opacity: 1;
           }
           to {
-            transform: translateX(100%) scale(0.9);
+            transform: translateX(120%) scale(0.85);
             opacity: 0;
           }
         }
@@ -46,7 +46,7 @@ export default function Home() {
             opacity: 1;
           }
           to {
-            transform: translateX(-100%) scale(0.9);
+            transform: translateX(-120%) scale(0.85);
             opacity: 0;
           }
         }
@@ -54,27 +54,35 @@ export default function Home() {
         @keyframes fillFromLeft {
           from {
             clip-path: inset(0 100% 0 0);
+            transform: scaleX(0);
+            transform-origin: left;
           }
           to {
             clip-path: inset(0 0 0 0);
+            transform: scaleX(1);
+            transform-origin: left;
           }
         }
 
         @keyframes fillFromRight {
           from {
             clip-path: inset(0 0 0 100%);
+            transform: scaleX(0);
+            transform-origin: right;
           }
           to {
             clip-path: inset(0 0 0 0);
+            transform: scaleX(1);
+            transform-origin: right;
           }
         }
 
         .slide-right {
-          animation: slideRight 0.8s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+          animation: slideRight 1s cubic-bezier(0.83, 0, 0.17, 1) forwards;
         }
 
         .slide-left {
-          animation: slideLeft 0.8s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+          animation: slideLeft 1s cubic-bezier(0.83, 0, 0.17, 1) forwards;
         }
       `}</style>
 
@@ -87,8 +95,8 @@ export default function Home() {
             }`}
             style={{
               animation: slideDirection === 'right'
-                ? 'fillFromLeft 0.8s cubic-bezier(0.76, 0, 0.24, 1) forwards'
-                : 'fillFromRight 0.8s cubic-bezier(0.76, 0, 0.24, 1) forwards'
+                ? 'fillFromLeft 1s cubic-bezier(0.83, 0, 0.17, 1) forwards'
+                : 'fillFromRight 1s cubic-bezier(0.83, 0, 0.17, 1) forwards'
             }}
           ></div>
         )}
@@ -105,12 +113,12 @@ export default function Home() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <h2
-                      className="text-7xl mb-6 group-hover:scale-105 transition-transform duration-500"
-                      style={{ fontFamily: "'Italiana', serif" }}
+                      className="text-8xl mb-4 group-hover:scale-105 transition-transform duration-500"
+                      style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, letterSpacing: '0.02em' }}
                     >
-                      Mannequin
+                      MANNEQUIN
                     </h2>
-                    <div className="w-24 h-px bg-white mx-auto opacity-60"></div>
+                    <div className="w-32 h-px bg-white mx-auto opacity-60"></div>
                   </div>
                 </div>
                 <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
@@ -124,12 +132,12 @@ export default function Home() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <h2
-                      className="text-7xl mb-6 group-hover:scale-105 transition-transform duration-500"
-                      style={{ fontFamily: "'Italiana', serif" }}
+                      className="text-8xl mb-4 group-hover:scale-105 transition-transform duration-500"
+                      style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, letterSpacing: '0.02em' }}
                     >
-                      Comédie
+                      COMÉDIE
                     </h2>
-                    <div className="w-24 h-px bg-black mx-auto opacity-60"></div>
+                    <div className="w-32 h-px bg-black mx-auto opacity-60"></div>
                   </div>
                 </div>
                 <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
@@ -138,25 +146,25 @@ export default function Home() {
 
             {/* Nom + Photo centrés */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
-              <div className="text-center mb-8">
+              <div className="text-center mb-6">
                 <h1
-                  className="text-6xl mb-3 text-black bg-white px-8 py-2"
-                  style={{ fontFamily: "'Italiana', serif" }}
+                  className="text-7xl mb-2 text-black bg-white/95 px-10 py-3 backdrop-blur-sm"
+                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, letterSpacing: '0.05em' }}
                 >
-                  Lea Brasseur
+                  LEA BRASSEUR
                 </h1>
                 <p
-                  className="text-xs tracking-[0.3em] uppercase text-gray-600 bg-white px-6 py-1 inline-block"
+                  className="text-xs tracking-[0.3em] uppercase text-gray-600 bg-white/90 px-6 py-1 inline-block backdrop-blur-sm"
                   style={{ fontFamily: "'Lexend', sans-serif" }}
                 >
                   Mannequin & Comédienne · Paris
                 </p>
               </div>
-              <div className="w-48 mx-auto">
+              <div className="w-40 mx-auto">
                 <img
                   src="/photos/IMG_4302.jpg"
                   alt="Lea Brasseur"
-                  className="w-full aspect-square object-cover shadow-2xl"
+                  className="w-full aspect-square object-cover shadow-2xl rounded-sm"
                 />
               </div>
             </div>
@@ -168,19 +176,19 @@ export default function Home() {
           <div className={`min-h-screen ${animating && slideDirection === 'left' ? 'slide-left' : ''}`}>
             {/* Header cliquable pour switcher - GRAND */}
             <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white border-b border-white/10">
-              <div className="flex justify-center items-center py-12">
+              <div className="flex justify-center items-center py-8">
                 <button
                   onClick={switchMode}
                   className="text-center hover:opacity-80 transition-opacity"
                 >
                   <h1
-                    className="text-5xl mb-3"
+                    className="text-4xl mb-2"
                     style={{ fontFamily: "'Italiana', serif" }}
                   >
                     Lea Brasseur
                   </h1>
                   <p
-                    className="text-sm tracking-[0.3em] uppercase text-gray-400"
+                    className="text-xs tracking-[0.3em] uppercase text-gray-400"
                     style={{ fontFamily: "'Lexend', sans-serif" }}
                   >
                     Mannequin · Cliquer pour Comédie →
@@ -189,10 +197,10 @@ export default function Home() {
               </div>
             </header>
 
-            <main className="pt-48 pb-32 bg-black text-white min-h-screen flex flex-col items-center">
+            <main className="pt-32 pb-24 bg-black text-white min-h-screen flex flex-col items-center">
               {/* Photos - Grille CENTREE avec flex */}
-              <div className="w-full flex justify-center mb-32">
-                <div className="grid grid-cols-3 gap-8 max-w-6xl px-8">
+              <div className="w-full flex justify-center mb-24">
+                <div className="grid grid-cols-3 gap-6 max-w-5xl px-8">
                   {[
                     '/photos/FlorianBoggia_Lea_37.jpg',
                     '/photos/FlorianBoggia_Lea_40.jpg',
@@ -217,45 +225,45 @@ export default function Home() {
 
               {/* Expériences - CENTREE avec flex */}
               <div className="w-full flex justify-center">
-                <div className="max-w-2xl px-8 space-y-20">
-                  <div className="text-center border-t border-white/20 pt-16">
+                <div className="max-w-2xl px-8 space-y-16">
+                  <div className="text-center border-t border-white/20 pt-12">
                     <span
-                      className="text-7xl block mb-6"
+                      className="text-6xl block mb-4"
                       style={{ fontFamily: "'Italiana', serif" }}
                     >
                       2025
                     </span>
                     <h4
-                      className="text-2xl mb-3"
+                      className="text-xl mb-2"
                       style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 400 }}
                     >
                       Campagne digitale et print — Papik
                     </h4>
-                    <p className="text-gray-400" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
+                    <p className="text-gray-400 text-sm" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
                       Test shoots avec Florian Boggia, Karina et Yoann
                     </p>
                   </div>
 
-                  <div className="text-center border-t border-white/20 pt-16">
+                  <div className="text-center border-t border-white/20 pt-12">
                     <span
-                      className="text-7xl block mb-6"
+                      className="text-6xl block mb-4"
                       style={{ fontFamily: "'Italiana', serif" }}
                     >
                       2021
                     </span>
                     <h4
-                      className="text-2xl mb-3"
+                      className="text-xl mb-2"
                       style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 400 }}
                     >
                       Miss Luxembourg
                     </h4>
-                    <p className="text-gray-400" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
+                    <p className="text-gray-400 text-sm" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
                       Défilés au Luxembourg pour Émilie Bolland · Mannequin pour la marque Boger
                     </p>
                   </div>
 
                   <p
-                    className="text-center text-xs uppercase tracking-[0.3em] text-gray-600 pt-16"
+                    className="text-center text-xs uppercase tracking-[0.3em] text-gray-600 pt-12"
                     style={{ fontFamily: "'Lexend', sans-serif" }}
                   >
                     Photographie · Florian Boggia
@@ -298,17 +306,17 @@ export default function Home() {
               </button>
             </header>
 
-            <main className="pt-40 pb-32 min-h-screen">
-              <div className="max-w-5xl mx-auto px-8">
-                {/* Vidéo - Plus petite, centrée */}
-                <div className="max-w-3xl mx-auto mb-32">
+            <main className="pt-32 pb-24 min-h-screen flex flex-col items-center">
+              {/* Vidéo - CENTREE avec flex */}
+              <div className="w-full flex justify-center mb-24">
+                <div className="max-w-3xl px-8 w-full">
                   <div className="bg-black shadow-xl">
                     <video controls preload="metadata" className="w-full aspect-video">
                       <source src="/videos/monologue.mp4" type="video/mp4" />
                     </video>
                   </div>
-                  <div className="text-center mt-12 border-t border-black/20 pt-10">
-                    <h3 className="text-3xl mb-3" style={{ fontFamily: "'Italiana', serif" }}>
+                  <div className="text-center mt-10 border-t border-black/20 pt-8">
+                    <h3 className="text-2xl mb-2" style={{ fontFamily: "'Italiana', serif" }}>
                       Tape Monologue
                     </h3>
                     <p className="text-sm text-gray-600" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
@@ -316,9 +324,11 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
+              </div>
 
-                {/* Filmographie - Timeline centrée épurée */}
-                <div className="max-w-2xl mx-auto space-y-20">
+              {/* Filmographie - CENTREE avec flex */}
+              <div className="w-full flex justify-center">
+                <div className="max-w-2xl px-8 space-y-16">
                   {[
                     { title: 'On Me', type: 'Clip musical', year: '2025', role: 'Rôle principal', details: 'Valentino & Harrison (DJ)' },
                     { title: 'UGC', type: 'Publicité', year: '2023', role: 'Comédienne', details: 'Paris' },
@@ -326,20 +336,20 @@ export default function Home() {
                     { title: 'Mary Shelley', type: 'Long-métrage', year: '2018', role: 'Figurante rapprochée', details: 'Réalisé par Haifaa al-Mansour' },
                     { title: 'Gainsbourg, Gainsbourg, Faubourg', type: 'Théâtre', year: '2016', role: 'Rôle', details: 'Luxembourg - "Poupée de cire, poupée de son"' },
                   ].map((project, i) => (
-                    <div key={i} className="text-center border-t border-black/20 pt-16">
-                      <span className="text-7xl block mb-6" style={{ fontFamily: "'Italiana', serif" }}>
+                    <div key={i} className="text-center border-t border-black/20 pt-12">
+                      <span className="text-6xl block mb-4" style={{ fontFamily: "'Italiana', serif" }}>
                         {project.year}
                       </span>
-                      <h4 className="text-3xl mb-3" style={{ fontFamily: "'Italiana', serif" }}>
+                      <h4 className="text-2xl mb-2" style={{ fontFamily: "'Italiana', serif" }}>
                         {project.title}
                       </h4>
                       <p
-                        className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-4"
+                        className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-3"
                         style={{ fontFamily: "'Lexend', sans-serif" }}
                       >
                         {project.type}
                       </p>
-                      <p className="text-lg mb-2" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 400 }}>
+                      <p className="text-base mb-1" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 400 }}>
                         {project.role}
                       </p>
                       {project.details && (
