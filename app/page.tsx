@@ -167,102 +167,107 @@ export default function Home() {
         {view === 'modeling' && (
           <div className={`min-h-screen ${animating && slideDirection === 'left' ? 'slide-left' : ''}`}>
             {/* Header cliquable pour switcher */}
-            <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-black/10">
-              <button
-                onClick={switchMode}
-                className="w-full max-w-7xl mx-auto px-8 py-8 text-center hover:opacity-80 transition-opacity"
-              >
-                <h1
-                  className="text-4xl mb-2"
-                  style={{ fontFamily: "'Italiana', serif" }}
+            <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white border-b border-white/10">
+              <div className="w-full text-center py-8">
+                <button
+                  onClick={switchMode}
+                  className="hover:opacity-80 transition-opacity"
                 >
-                  Lea Brasseur
-                </h1>
-                <p
-                  className="text-sm tracking-[0.3em] uppercase text-gray-600"
-                  style={{ fontFamily: "'Lexend', sans-serif" }}
-                >
-                  Mannequin · Cliquer pour Comédie →
-                </p>
-              </button>
-            </header>
-
-            <main className="pt-40 pb-32 bg-white min-h-screen">
-              <div className="max-w-6xl mx-auto px-8">
-                {/* Photos - Grille centrée épurée */}
-                <div className="grid grid-cols-3 gap-8 mb-32">
-                  {[
-                    '/photos/FlorianBoggia_Lea_37.jpg',
-                    '/photos/FlorianBoggia_Lea_40.jpg',
-                    '/photos/IMG_4313 2.jpg',
-                    '/photos/FlorianBoggia_Lea_18.jpg',
-                    '/photos/IMG_4345.jpg',
-                    '/photos/IMG_4278.jpg',
-                    '/photos/IMG_5088.jpg',
-                    '/photos/IMG_4302.jpg',
-                    '/photos/FlorianBoggia_Lea_14.jpg',
-                  ].map((src, i) => (
-                    <div key={i} className="aspect-[3/4] overflow-hidden shadow-lg">
-                      <img
-                        src={src}
-                        alt={`Photo ${i + 1}`}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Expériences - Timeline verticale centrée */}
-                <div className="max-w-2xl mx-auto space-y-20">
-                  <div className="text-center border-t border-black/20 pt-16">
-                    <span
-                      className="text-7xl block mb-6"
-                      style={{ fontFamily: "'Italiana', serif" }}
-                    >
-                      2025
-                    </span>
-                    <h4
-                      className="text-2xl mb-3"
-                      style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 400 }}
-                    >
-                      Campagne digitale et print — Papik
-                    </h4>
-                    <p className="text-gray-600" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
-                      Test shoots avec Florian Boggia, Karina et Yoann
-                    </p>
-                  </div>
-
-                  <div className="text-center border-t border-black/20 pt-16">
-                    <span
-                      className="text-7xl block mb-6"
-                      style={{ fontFamily: "'Italiana', serif" }}
-                    >
-                      2021
-                    </span>
-                    <h4
-                      className="text-2xl mb-3"
-                      style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 400 }}
-                    >
-                      Miss Luxembourg
-                    </h4>
-                    <p className="text-gray-600" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
-                      Défilés au Luxembourg pour Émilie Bolland · Mannequin pour la marque Boger
-                    </p>
-                  </div>
-
+                  <h1
+                    className="text-4xl mb-2"
+                    style={{ fontFamily: "'Italiana', serif" }}
+                  >
+                    Lea Brasseur
+                  </h1>
                   <p
-                    className="text-center text-xs uppercase tracking-[0.3em] text-gray-400 pt-16"
+                    className="text-sm tracking-[0.3em] uppercase text-gray-400"
                     style={{ fontFamily: "'Lexend', sans-serif" }}
                   >
-                    Photographie · Florian Boggia
+                    Mannequin · Cliquer pour Comédie →
                   </p>
+                </button>
+              </div>
+            </header>
+
+            <main className="pt-40 pb-32 bg-black text-white min-h-screen">
+              <div className="w-full px-8">
+                {/* Photos - Grille VRAIMENT centrée */}
+                <div className="max-w-5xl mx-auto mb-32">
+                  <div className="grid grid-cols-3 gap-8 justify-items-center">
+                    {[
+                      '/photos/FlorianBoggia_Lea_37.jpg',
+                      '/photos/FlorianBoggia_Lea_40.jpg',
+                      '/photos/IMG_4313 2.jpg',
+                      '/photos/FlorianBoggia_Lea_18.jpg',
+                      '/photos/IMG_4345.jpg',
+                      '/photos/IMG_4278.jpg',
+                      '/photos/IMG_5088.jpg',
+                      '/photos/IMG_4302.jpg',
+                    ].map((src, i) => (
+                      <div key={i} className="w-full aspect-[3/4] overflow-hidden">
+                        <img
+                          src={src}
+                          alt={`Photo ${i + 1}`}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 grayscale hover:grayscale-0"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Expériences - VRAIMENT centrée */}
+                <div className="w-full">
+                  <div className="max-w-2xl mx-auto space-y-20">
+                    <div className="text-center border-t border-white/20 pt-16">
+                      <span
+                        className="text-7xl block mb-6"
+                        style={{ fontFamily: "'Italiana', serif" }}
+                      >
+                        2025
+                      </span>
+                      <h4
+                        className="text-2xl mb-3"
+                        style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 400 }}
+                      >
+                        Campagne digitale et print — Papik
+                      </h4>
+                      <p className="text-gray-400" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
+                        Test shoots avec Florian Boggia, Karina et Yoann
+                      </p>
+                    </div>
+
+                    <div className="text-center border-t border-white/20 pt-16">
+                      <span
+                        className="text-7xl block mb-6"
+                        style={{ fontFamily: "'Italiana', serif" }}
+                      >
+                        2021
+                      </span>
+                      <h4
+                        className="text-2xl mb-3"
+                        style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 400 }}
+                      >
+                        Miss Luxembourg
+                      </h4>
+                      <p className="text-gray-400" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
+                        Défilés au Luxembourg pour Émilie Bolland · Mannequin pour la marque Boger
+                      </p>
+                    </div>
+
+                    <p
+                      className="text-center text-xs uppercase tracking-[0.3em] text-gray-600 pt-16"
+                      style={{ fontFamily: "'Lexend', sans-serif" }}
+                    >
+                      Photographie · Florian Boggia
+                    </p>
+                  </div>
                 </div>
               </div>
             </main>
 
             <button
               onClick={() => setView('home')}
-              className="fixed bottom-8 left-1/2 -translate-x-1/2 px-8 py-3 bg-black text-white text-xs uppercase tracking-widest hover:bg-gray-800 transition-colors"
+              className="fixed bottom-8 left-1/2 -translate-x-1/2 px-8 py-3 bg-white text-black text-xs uppercase tracking-widest hover:bg-gray-200 transition-colors"
               style={{ fontFamily: "'Lexend', sans-serif" }}
             >
               ← Retour
