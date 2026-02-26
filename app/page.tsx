@@ -167,7 +167,7 @@ export default function Home() {
         {view === 'modeling' && (
           <div className={`min-h-screen ${animating && slideDirection === 'left' ? 'slide-left' : ''}`}>
             {/* Header cliquable pour switcher */}
-            <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white border-b border-white/20">
+            <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-black/10">
               <button
                 onClick={switchMode}
                 className="w-full max-w-7xl mx-auto px-8 py-8 text-center hover:opacity-80 transition-opacity"
@@ -179,7 +179,7 @@ export default function Home() {
                   Lea Brasseur
                 </h1>
                 <p
-                  className="text-sm tracking-[0.3em] uppercase opacity-60"
+                  className="text-sm tracking-[0.3em] uppercase text-gray-600"
                   style={{ fontFamily: "'Lexend', sans-serif" }}
                 >
                   Mannequin · Cliquer pour Comédie →
@@ -187,10 +187,10 @@ export default function Home() {
               </button>
             </header>
 
-            <main className="pt-40 pb-20 bg-black text-white min-h-screen">
-              <div className="max-w-7xl mx-auto px-8">
-                {/* Photos */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24">
+            <main className="pt-40 pb-32 bg-white min-h-screen">
+              <div className="max-w-6xl mx-auto px-8">
+                {/* Photos - Grille centrée épurée */}
+                <div className="grid grid-cols-3 gap-8 mb-32">
                   {[
                     '/photos/FlorianBoggia_Lea_37.jpg',
                     '/photos/FlorianBoggia_Lea_40.jpg',
@@ -200,72 +200,58 @@ export default function Home() {
                     '/photos/IMG_4278.jpg',
                     '/photos/IMG_5088.jpg',
                     '/photos/IMG_4302.jpg',
+                    '/photos/FlorianBoggia_Lea_14.jpg',
                   ].map((src, i) => (
-                    <div key={i} className="aspect-[3/4] overflow-hidden bg-gray-900">
+                    <div key={i} className="aspect-[3/4] overflow-hidden shadow-lg">
                       <img
                         src={src}
                         alt={`Photo ${i + 1}`}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 grayscale hover:grayscale-0"
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                       />
                     </div>
                   ))}
                 </div>
 
-                {/* Expériences */}
-                <div className="max-w-5xl mx-auto">
-                  <div className="text-center mb-16">
-                    <h3
-                      className="text-5xl mb-4"
+                {/* Expériences - Timeline verticale centrée */}
+                <div className="max-w-2xl mx-auto space-y-20">
+                  <div className="text-center border-t border-black/20 pt-16">
+                    <span
+                      className="text-7xl block mb-6"
                       style={{ fontFamily: "'Italiana', serif" }}
                     >
-                      Expériences
-                    </h3>
-                    <div className="w-20 h-px bg-white mx-auto opacity-60"></div>
+                      2025
+                    </span>
+                    <h4
+                      className="text-2xl mb-3"
+                      style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 400 }}
+                    >
+                      Campagne digitale et print — Papik
+                    </h4>
+                    <p className="text-gray-600" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
+                      Test shoots avec Florian Boggia, Karina et Yoann
+                    </p>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div className="text-center p-8 border border-white/30 hover:bg-white hover:text-black transition-all duration-300">
-                      <span
-                        className="text-6xl block mb-4"
-                        style={{ fontFamily: "'Italiana', serif" }}
-                      >
-                        2025
-                      </span>
-                      <h4
-                        className="text-xl mb-3"
-                        style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 500 }}
-                      >
-                        Campagne Papik
-                      </h4>
-                      <p className="text-sm mb-2" style={{ fontFamily: "'Lexend', sans-serif" }}>
-                        Digital & Print
-                      </p>
-                      <p className="text-xs opacity-60" style={{ fontFamily: "'Lexend', sans-serif" }}>
-                        Florian Boggia · Karina · Yoann
-                      </p>
-                    </div>
-
-                    <div className="text-center p-8 border border-white/30 hover:bg-white hover:text-black transition-all duration-300">
-                      <span
-                        className="text-6xl block mb-4"
-                        style={{ fontFamily: "'Italiana', serif" }}
-                      >
-                        2021
-                      </span>
-                      <h4
-                        className="text-xl mb-3"
-                        style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 500 }}
-                      >
-                        Miss Luxembourg
-                      </h4>
-                      <p className="text-sm" style={{ fontFamily: "'Lexend', sans-serif" }}>
-                        Défilés Luxembourg · Émilie Bolland · Marque Boger
-                      </p>
-                    </div>
+                  <div className="text-center border-t border-black/20 pt-16">
+                    <span
+                      className="text-7xl block mb-6"
+                      style={{ fontFamily: "'Italiana', serif" }}
+                    >
+                      2021
+                    </span>
+                    <h4
+                      className="text-2xl mb-3"
+                      style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 400 }}
+                    >
+                      Miss Luxembourg
+                    </h4>
+                    <p className="text-gray-600" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
+                      Défilés au Luxembourg pour Émilie Bolland · Mannequin pour la marque Boger
+                    </p>
                   </div>
 
                   <p
-                    className="text-center text-xs uppercase tracking-widest opacity-40 mt-16"
+                    className="text-center text-xs uppercase tracking-[0.3em] text-gray-400 pt-16"
                     style={{ fontFamily: "'Lexend', sans-serif" }}
                   >
                     Photographie · Florian Boggia
@@ -276,7 +262,7 @@ export default function Home() {
 
             <button
               onClick={() => setView('home')}
-              className="fixed bottom-8 left-1/2 -translate-x-1/2 px-8 py-3 bg-white text-black text-xs uppercase tracking-widest hover:bg-gray-200 transition-colors"
+              className="fixed bottom-8 left-1/2 -translate-x-1/2 px-8 py-3 bg-black text-white text-xs uppercase tracking-widest hover:bg-gray-800 transition-colors"
               style={{ fontFamily: "'Lexend', sans-serif" }}
             >
               ← Retour
@@ -308,73 +294,57 @@ export default function Home() {
               </button>
             </header>
 
-            <main className="pt-40 pb-20 min-h-screen">
-              <div className="max-w-6xl mx-auto px-8">
-                {/* Vidéo */}
-                <div className="max-w-4xl mx-auto mb-24">
-                  <div className="bg-black shadow-2xl">
+            <main className="pt-40 pb-32 min-h-screen">
+              <div className="max-w-5xl mx-auto px-8">
+                {/* Vidéo - Plus petite, centrée */}
+                <div className="max-w-3xl mx-auto mb-32">
+                  <div className="bg-black shadow-xl">
                     <video controls preload="metadata" className="w-full aspect-video">
                       <source src="/videos/monologue.mp4" type="video/mp4" />
                     </video>
                   </div>
-                  <div className="text-center mt-10 p-6 border border-black/20">
-                    <h3 className="text-3xl mb-2" style={{ fontFamily: "'Italiana', serif" }}>
+                  <div className="text-center mt-12 border-t border-black/20 pt-10">
+                    <h3 className="text-3xl mb-3" style={{ fontFamily: "'Italiana', serif" }}>
                       Tape Monologue
                     </h3>
-                    <p className="text-sm text-gray-600" style={{ fontFamily: "'Lexend', sans-serif" }}>
+                    <p className="text-sm text-gray-600" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
                       Extrait de travail personnel · 2026
                     </p>
                   </div>
                 </div>
 
-                {/* Filmographie */}
-                <div className="max-w-4xl mx-auto">
-                  <div className="text-center mb-16">
-                    <h3 className="text-5xl mb-4" style={{ fontFamily: "'Italiana', serif" }}>
-                      Filmographie
-                    </h3>
-                    <div className="w-20 h-px bg-black mx-auto opacity-60"></div>
-                  </div>
-
-                  <div className="space-y-6">
-                    {[
-                      { title: 'On Me', type: 'Clip musical', year: '2025', role: 'Rôle principal', details: 'Valentino & Harrison (DJ)' },
-                      { title: 'UGC', type: 'Publicité', year: '2023', role: 'Comédienne', details: 'Paris' },
-                      { title: 'Friends', type: 'Clip musical', year: '2021', role: 'Participation', details: 'Nathan Morrison' },
-                      { title: 'Mary Shelley', type: 'Long-métrage', year: '2018', role: 'Figurante rapprochée', details: 'Réalisé par Haifaa al-Mansour' },
-                      { title: 'Gainsbourg, Gainsbourg, Faubourg', type: 'Théâtre', year: '2016', role: 'Rôle', details: 'Luxembourg - "Poupée de cire, poupée de son"' },
-                    ].map((project, i) => (
-                      <div
-                        key={i}
-                        className="grid md:grid-cols-[120px,1fr] gap-6 p-6 border border-black/20 hover:bg-black hover:text-white transition-all duration-300"
+                {/* Filmographie - Timeline centrée épurée */}
+                <div className="max-w-2xl mx-auto space-y-20">
+                  {[
+                    { title: 'On Me', type: 'Clip musical', year: '2025', role: 'Rôle principal', details: 'Valentino & Harrison (DJ)' },
+                    { title: 'UGC', type: 'Publicité', year: '2023', role: 'Comédienne', details: 'Paris' },
+                    { title: 'Friends', type: 'Clip musical', year: '2021', role: 'Participation', details: 'Nathan Morrison' },
+                    { title: 'Mary Shelley', type: 'Long-métrage', year: '2018', role: 'Figurante rapprochée', details: 'Réalisé par Haifaa al-Mansour' },
+                    { title: 'Gainsbourg, Gainsbourg, Faubourg', type: 'Théâtre', year: '2016', role: 'Rôle', details: 'Luxembourg - "Poupée de cire, poupée de son"' },
+                  ].map((project, i) => (
+                    <div key={i} className="text-center border-t border-black/20 pt-16">
+                      <span className="text-7xl block mb-6" style={{ fontFamily: "'Italiana', serif" }}>
+                        {project.year}
+                      </span>
+                      <h4 className="text-3xl mb-3" style={{ fontFamily: "'Italiana', serif" }}>
+                        {project.title}
+                      </h4>
+                      <p
+                        className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-4"
+                        style={{ fontFamily: "'Lexend', sans-serif" }}
                       >
-                        <div className="text-center md:text-left">
-                          <span className="text-5xl block" style={{ fontFamily: "'Italiana', serif" }}>
-                            {project.year}
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="text-3xl mb-2" style={{ fontFamily: "'Italiana', serif" }}>
-                            {project.title}
-                          </h4>
-                          <p
-                            className="text-xs uppercase tracking-widest opacity-60 mb-2"
-                            style={{ fontFamily: "'Lexend', sans-serif" }}
-                          >
-                            {project.type}
-                          </p>
-                          <p className="text-base mb-1" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 500 }}>
-                            {project.role}
-                          </p>
-                          {project.details && (
-                            <p className="text-sm opacity-60" style={{ fontFamily: "'Lexend', sans-serif" }}>
-                              {project.details}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                        {project.type}
+                      </p>
+                      <p className="text-lg mb-2" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 400 }}>
+                        {project.role}
+                      </p>
+                      {project.details && (
+                        <p className="text-sm text-gray-600" style={{ fontFamily: "'Lexend', sans-serif", fontWeight: 300 }}>
+                          {project.details}
+                        </p>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </main>
