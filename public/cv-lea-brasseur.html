@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lea Brasseur - CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.25;
+            color: #000;
+            background: #fff;
+            font-size: 9.5pt;
+            margin: 8mm;
+        }
+
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #000;
+        }
+
+        .profile-photo {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 6px;
+            display: block;
+            border: 2px solid #000;
+        }
+
+        h1 {
+            font-size: 30pt;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 9.5pt;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .contact {
+            font-size: 8.5pt;
+            letter-spacing: 0.3px;
+            margin-top: 6px;
+        }
+
+        .contact-line {
+            margin: 2px 0;
+        }
+
+        /* PROFIL */
+        .profile-grid {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 10px;
+            padding: 12px 16px;
+            background: #000;
+            color: #fff;
+            align-items: center;
+        }
+
+        .profile-section {
+            flex: 1;
+        }
+
+        .profile-section h3 {
+            font-size: 8pt;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .stats {
+            font-size: 9pt;
+            line-height: 1.5;
+        }
+
+        .stat-item {
+            display: inline;
+            margin-right: 12px;
+            white-space: nowrap;
+        }
+
+        .stat-label {
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            font-size: 7pt;
+            opacity: 0.7;
+            margin-right: 4px;
+        }
+
+        .stat-value {
+            font-weight: 500;
+            font-size: 9pt;
+        }
+
+        .languages {
+            font-size: 9pt;
+            line-height: 1.6;
+        }
+
+        .lang-item {
+            font-weight: 500;
+        }
+
+        .lang-level {
+            font-size: 7pt;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-left: 4px;
+        }
+
+        /* SECTIONS */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 12px;
+        }
+
+        section {
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 9.5pt;
+            letter-spacing: 2.5px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 400;
+            border-bottom: 1px solid #000;
+            padding-bottom: 4px;
+        }
+
+        .exp-item {
+            margin-bottom: 6px;
+            font-size: 9pt;
+            line-height: 1.35;
+        }
+
+        .exp-year {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: inline;
+            margin-right: 8px;
+        }
+
+        .exp-role {
+            font-weight: 500;
+            display: inline;
+        }
+
+        .exp-production {
+            font-size: 7.5pt;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            display: block;
+            margin-top: 1px;
+        }
+
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skills-list li {
+            background: #000;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 8pt;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            html, body {
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                font-size: 9.5pt;
+                margin: 8mm;
+                line-height: 1.25;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 32pt;
+            }
+            .profile-grid, .experience-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="cv-lea-photo.jpg" alt="Lea Brasseur" class="profile-photo">
+            <h1>LEA BRASSEUR</h1>
+            <div class="subtitle">Comédienne · Mannequin</div>
+            <div class="contact">
+                <div class="contact-line">leasevenig13@icloud.com</div>
+                <div class="contact-line">+33 6 64 32 20 24</div>
+                <div class="contact-line">Paris, France</div>
+            </div>
+        </header>
+
+        <!-- PROFIL -->
+        <div class="profile-grid">
+            <div class="profile-section">
+                <h3>Profil</h3>
+                <div class="stats">
+                    <span class="stat-item"><span class="stat-label">Née le</span><span class="stat-value">13 février 2000</span></span>
+                    <br>
+                    <span class="stat-item"><span class="stat-label">Taille</span><span class="stat-value">178 cm</span></span>
+                    <span class="stat-item"><span class="stat-label">Pointure</span><span class="stat-value">39 EU</span></span>
+                    <br>
+                    <span class="stat-item"><span class="stat-label">Mensurations</span><span class="stat-value">82-63-94</span></span>
+                    <span class="stat-item"><span class="stat-label">Confection</span><span class="stat-value">34-36</span></span>
+                    <br>
+                    <span class="stat-item"><span class="stat-label">Cheveux</span><span class="stat-value">Blond</span></span>
+                    <span class="stat-item"><span class="stat-label">Yeux</span><span class="stat-value">Bleu</span></span>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3>Langues</h3>
+                <div class="languages">
+                    <span class="lang-item">Français<span class="lang-level">Maternelle</span></span>
+                    <br>
+                    <span class="lang-item">Luxembourgeois<span class="lang-level">Maternelle</span></span>
+                    <br>
+                    <span class="lang-item">Anglais<span class="lang-level">Courant</span></span>
+                    <br>
+                    <span class="lang-item">Allemand<span class="lang-level">Courant</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXPERIENCE (2 colonnes) -->
+        <div class="experience-grid">
+            <section>
+                <h2>Comédie · Actrice</h2>
+                <div class="exp-item">
+                    <span class="exp-year">2025</span>
+                    <span class="exp-role">Rôle principal — Clip "On Me"</span>
+                    <span class="exp-production">Valentino × Harrison</span>
+                </div>
+                <div class="exp-item">
+                    <span class="exp-year">2023</span>
+                    <span class="exp-role">Publicité UGC</span>
+                    <span class="exp-production">Paris</span>
+                </div>
+                <div class="exp-item">
+                    <span class="exp-year">2021</span>
+                    <span class="exp-role">Clip "Friends"</span>
+                    <span class="exp-production">Nathan Morrison</span>
+                </div>
+                <div class="exp-item">
+                    <span class="exp-year">2018</span>
+                    <span class="exp-role">Figurante — Mary Shelley</span>
+                    <span class="exp-production">Haifaa al-Mansour</span>
+                </div>
+                <div class="exp-item">
+                    <span class="exp-year">2016</span>
+                    <span class="exp-role">Gainsbourg, Gainsbarre, Faut voir</span>
+                    <span class="exp-production">Luxembourg</span>
+                </div>
+            </section>
+
+            <section>
+                <h2>Mannequinat · Mode</h2>
+                <div class="exp-item">
+                    <span class="exp-year">2025</span>
+                    <span class="exp-role">Campagne Papik</span>
+                    <span class="exp-production">Digital & Print</span>
+                </div>
+                <div class="exp-item">
+                    <span class="exp-year">2025</span>
+                    <span class="exp-role">Test shoots — F. Boggia, Karla, J. Lek</span>
+                    <span class="exp-production">Photographie</span>
+                </div>
+                <div class="exp-item">
+                    <span class="exp-year">2021</span>
+                    <span class="exp-role">Miss Luxembourg — Défilés É. Bolland</span>
+                    <span class="exp-production">Luxembourg</span>
+                </div>
+                <div class="exp-item">
+                    <span class="exp-year">2021</span>
+                    <span class="exp-role">Mannequin Boger</span>
+                    <span class="exp-production">Luxembourg</span>
+                </div>
+            </section>
+        </div>
+
+        <!-- COMPETENCES -->
+        <section>
+            <h2>Compétences</h2>
+            <ul class="skills-list">
+                <li>Chant</li>
+                <li>Théâtre</li>
+                <li>Performance</li>
+                <li>Clip musical</li>
+                <li>Photographie mode</li>
+                <li>Défilé</li>
+                <li>Permis B</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
