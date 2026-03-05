@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lea Brasseur</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -1077,6 +1078,135 @@
           });
         }
       });
+    });
+
+    // ========== TRACKING LEABRASSEUR ==========
+    const TRACKING_URL = 'https://xhpsdbmajanmoztijbnx.supabase.co/functions/v1/lea-tracking';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhocHNkYm1hamFubW96dGlqYm54Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3NTY2MjksImV4cCI6MjA4NTMzMjYyOX0.HwFRHULHBBQlWoOwD9lMav5Icjlfe92o1QZspxI_2DQ';
+
+    // Get or create unique visitor ID
+    function getVisitorId() {
+      let id = localStorage.getItem('leabrasseur_visitor_id');
+      if (!id) {
+        id = 'lb_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now().toString(36);
+        localStorage.setItem('leabrasseur_visitor_id', id);
+      }
+      return id;
+    }
+
+    const visitorId = getVisitorId();
+
+    async function trackEvent(eventType, extra = {}) {
+      try {
+        await fetch(TRACKING_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify({
+            event: eventType,
+            page: window.location.pathname,
+            visitorId: visitorId,
+            userAgent: navigator.userAgent,
+            referrer: document.referrer,
+            site: 'leabrasseur',
+            ...extra
+          })
+        });
+      } catch (e) {
+        // Silent fail
+      }
+    }
+
+    // Track homepage visit (once per session)
+    if (!sessionStorage.getItem('leabrasseur_tracked')) {
+      sessionStorage.setItem('leabrasseur_tracked', '1');
+      trackEvent('visit');
+    }
+
+    // Track CV clicks
+    document.querySelectorAll('a[href*="cv.pdf"], a.download-cv:not(.secondary)').forEach(link => {
+      link.addEventListener('click', () => {
+        trackEvent('cv_click');
+      });
+    });
+
+    // Track Polas clicks
+    document.querySelectorAll('a[href*="polas.pdf"], a.download-cv.secondary').forEach(link => {
+      link.addEventListener('click', () => {
+        trackEvent('polas_click');
+      });
+    });
+
+    // Track gallery photo clicks
+    document.querySelectorAll('.gallery-item img').forEach((img, index) => {
+      img.addEventListener('click', () => {
+        const photoName = img.src.split('/').pop();
+        trackEvent('photo_click', { photo: photoName, position: index + 1 });
+      });
+    });
+
+    // Engagement tracking
+    const engagementData = {
+      scrollDepth: 0,
+      timeOnPage: 0,
+      startTime: Date.now(),
+      emailClicked: false,
+      phoneClicked: false,
+      linkedinClicked: false
+    };
+
+    let maxScroll = 0;
+
+    // Track scroll depth
+    window.addEventListener('scroll', () => {
+      const scrollPct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      if (scrollPct > maxScroll) {
+        maxScroll = scrollPct;
+        engagementData.scrollDepth = maxScroll;
+      }
+    }, { passive: true });
+
+    // Track contact actions
+    document.querySelectorAll('a[href^="mailto:"]').forEach(el => {
+      el.addEventListener('click', () => {
+        engagementData.emailClicked = true;
+        trackEvent('email_click');
+      });
+    });
+
+    document.querySelectorAll('a[href^="tel:"]').forEach(el => {
+      el.addEventListener('click', () => {
+        engagementData.phoneClicked = true;
+        trackEvent('phone_click');
+      });
+    });
+
+    document.querySelectorAll('a[href*="linkedin"], a[href*="instagram"]').forEach(el => {
+      el.addEventListener('click', () => {
+        const platform = el.href.includes('linkedin') ? 'linkedin' : 'instagram';
+        trackEvent('social_click', { platform });
+      });
+    });
+
+    // Track time on page on exit
+    window.addEventListener('beforeunload', () => {
+      engagementData.timeOnPage = Math.round((Date.now() - engagementData.startTime) / 1000);
+
+      if (engagementData.timeOnPage > 5) {
+        const data = new URLSearchParams({
+          event: 'engagement',
+          visitorId: visitorId,
+          site: 'leabrasseur',
+          scrollDepth: engagementData.scrollDepth,
+          timeOnPage: engagementData.timeOnPage,
+          emailClicked: engagementData.emailClicked,
+          phoneClicked: engagementData.phoneClicked
+        });
+
+        navigator.sendBeacon(TRACKING_URL + '?' + data.toString());
+      }
     });
   </script>
 </body>
